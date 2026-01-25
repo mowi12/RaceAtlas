@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+    tags: [ "v*.*.*" ]
+  pull_request:
+
+env:
+  node-version: ${{ vars.NODE_VERSION }}
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/workflows/setup/
+        with:
+          node_version: ${{ env.node-version }}
+
+      - name: Build Application
+        shell: bash
+        run: pnpm run build
+
+      - name: Archive Build Artifacts
+        uses: actions/upload-artifact@v6
+        if: ${{ !cancelled() }}
+        with:
+          name: build-artifact
+          path: |
+            .next/
+            package.json
+            pnpm-lock.json
+          if-no-files-found: error
