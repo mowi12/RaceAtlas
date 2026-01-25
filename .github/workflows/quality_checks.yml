@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+env:
+  node-version: ${{ vars.NODE_VERSION }}
+
 jobs:
   lint:
     name: Lint
@@ -14,10 +17,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Biome
-        uses: biomejs/setup-biome@v2
+      - name: Setup
+        uses: ./.github/workflows/setup/
         with:
-          version: latest
+          node_version: ${{ env.node-version }}
 
       - name: Run Biome
-        run: biome ci .
+        shell: bash
+        run: npm run lint
+
+      - name: Lint Markdown Files
+        shell: bash
+        run: npm run lint:md
