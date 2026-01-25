@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      fuse.js:
+        specifier: ^7.1.0
+        version: 7.1.0
       next:
         specifier: 16.1.4
         version: 16.1.4(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -514,6 +517,10 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  fuse.js@7.1.0:
+    resolution: {integrity: sha512-trLf4SzuuUxfusZADLINj+dE8clK1frKdmqiJNb1Es75fmI5oY6X2mxLVUciLLjxqw/xr72Dhy+lER6dGd02FQ==}
+    engines: {node: '>=10'}
 
   get-east-asian-width@1.4.0:
     resolution: {integrity: sha512-QZjmEOC+IT1uk6Rx0sX22V6uHWVwbdbxf1faPqJ1QhLdGgsRGCZoyaQBm/piRdJy/D2um6hM1UP7ZEeQ4EkP+Q==}
@@ -1224,6 +1231,8 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.3):
     optionalDependencies:
       picomatch: 4.0.3
+
+  fuse.js@7.1.0: {}
 
   get-east-asian-width@1.4.0: {}
 
