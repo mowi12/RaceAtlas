@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type React from "react";
+import { ThemeProvider } from "@/lib/components/composites/theme/theme-provider";
 import { routing } from "@/lib/i18n/routing";
 
 const poppins = Poppins({
@@ -53,7 +54,16 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} className={poppins.variable}>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionsOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
