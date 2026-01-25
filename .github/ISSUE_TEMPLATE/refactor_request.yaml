@@ -1,0 +1,41 @@
+name: Refactor Request
+description: Propose a refactor to improve code quality, maintainability, or performance
+title: "[Refactor]: <title>"
+labels: [ "refactor", "maintenance" ]
+
+body:
+  - type: checkboxes
+    id: existing-issue
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for this refactor.
+      options:
+        - label: I have searched the existing issues
+          required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why is this refactor needed?
+      description: Describe the problem with the current implementation (e.g. complexity, duplication, performance, technical debt).
+      placeholder: The current implementation is hard to maintain because [...]
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: What should be refactored?
+      description: Specify the files, modules, or components that should be affected.
+      placeholder: This mainly affects the authentication service and related tests.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-approach
+    attributes:
+      label: Proposed approach
+      description: Describe how you think the refactor should be done (high-level is fine).
+      placeholder: Extract shared logic into a separate module and simplify the control flow.
+    validations:
+      required: false

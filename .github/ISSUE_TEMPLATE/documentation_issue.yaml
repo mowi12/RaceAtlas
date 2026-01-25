@@ -1,0 +1,32 @@
+name: Documentation Issue
+description: Report missing, unclear, or incorrect documentation
+title: "[Docs]: <title>"
+labels: [ "documentation" ]
+
+body:
+  - type: checkboxes
+    id: existing-issue
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for this documentation issue.
+      options:
+        - label: I have searched the existing issues
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong or missing?
+      description: Describe the issue with the current documentation.
+      placeholder: The README does not explain how to configure [...]
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-change
+    attributes:
+      label: Suggested improvement
+      description: Describe how the documentation should be improved.
+      placeholder: Add a configuration example for [...]
+    validations:
+      required: false
