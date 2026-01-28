@@ -3,6 +3,10 @@
     "title": "RaceAtlas",
     "description": "Discover races in your area"
   },
+  "Manifest": {
+    "name": "RaceAtlas",
+    "shortName": "RaceAtlas"
+  },
   "Home": {
     "title": "RaceAtlas"
   }
