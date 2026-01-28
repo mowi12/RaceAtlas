@@ -3,6 +3,10 @@
     "title": "RaceAtlas",
     "description": "Entdecke Läufe in deiner Nähe"
   },
+  "Manifest": {
+    "name": "RaceAtlas",
+    "shortName": "RaceAtlas"
+  },
   "Home": {
     "title": "RaceAtlas"
   }
