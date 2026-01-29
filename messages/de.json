@@ -8,6 +8,7 @@
     "shortName": "RaceAtlas"
   },
   "Home": {
-    "title": "RaceAtlas"
+    "title": "RaceAtlas",
+    "description": "Entdecke Läufe in deiner Nähe"
   }
 }

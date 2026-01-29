@@ -1,9 +1,27 @@
 import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type React from "react";
 import { routing } from "@/lib/i18n/routing";
+
+const poppins = Poppins({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "700"],
+  style: ["normal"],
+  display: "swap",
+  variable: "--font-poppins",
+  preload: true,
+  fallback: [
+    "system-ui",
+    "Segoe UI",
+    "Roboto",
+    "Helvetica",
+    "Arial",
+    "sans-serif",
+  ],
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -34,7 +52,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={poppins.variable}>
       <body>{children}</body>
     </html>
   );

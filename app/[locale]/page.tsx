@@ -14,5 +14,10 @@ export default function Home({ params }: Props) {
 
   const t = useTranslations("Home");
 
-  return <div>{t("title")}</div>;
+  return (
+    <div>
+      <div className="brand-word">{t("title")}</div>
+      <div>{t("description")}</div>
+    </div>
+  );
 }
