@@ -1,4 +1,7 @@
+"use client";
+
 import { ChevronRight, Route } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { useState } from "react";
 import { Badge } from "@/lib/components/primitives/badge";
@@ -13,6 +16,7 @@ function stopLinkNavigation(e: React.SyntheticEvent) {
 }
 
 export function EventDistancesBadge({ distances }: EventDistancesBadgeProps) {
+  const t = useTranslations("Timeline");
   const [open, setOpen] = useState(false);
 
   const toggle = () => {
@@ -40,7 +44,7 @@ export function EventDistancesBadge({ distances }: EventDistancesBadgeProps) {
         className="bg-muted text-muted-foreground border-border cursor-pointer select-none transition-colors hover:text-foreground"
       >
         <Route />
-        {distances.length} Distances
+        {t("badges.distances", { count: distances.length })}
       </Badge>
 
       {open && distances.length > 0 && (

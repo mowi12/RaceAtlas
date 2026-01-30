@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Button } from "@/lib/components/primitives/button";
 import {
   Popover,
@@ -21,15 +22,18 @@ export function EventTypeFilter({
   options,
   onClearAction,
 }: EventTypeFilterProps) {
+  const t = useTranslations("Timeline");
   const selected = new Set(value);
   const label =
-    value.length > 0 ? `Event types (${value.length})` : "Event types";
+    value.length > 0
+      ? t("filters.eventTypes.buttonSelected", { count: value.length })
+      : t("filters.eventTypes.button");
 
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between">
         <span className="text-xs font-medium text-muted-foreground">
-          Event Type
+          {t("filters.eventTypes.label")}
         </span>
         {onClearAction ? (
           <button
@@ -38,7 +42,7 @@ export function EventTypeFilter({
             disabled={value.length === 0}
             className="text-xs text-muted-foreground hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Clear
+            {t("filters.eventTypes.clear")}
           </button>
         ) : null}
       </div>

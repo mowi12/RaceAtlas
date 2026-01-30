@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import type React from "react";
 import { GithubLinkButton } from "@/lib/components/composites/external-link-button/github-link-button";
 import { LanguageSelect } from "@/lib/components/composites/language-select/language-select";
@@ -44,6 +48,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   // Enable static rendering
   setRequestLocale(locale);
 
+  const messages = await getMessages({ locale });
+
   return (
     <div suppressHydrationWarning>
       <ThemeProvider
@@ -52,7 +58,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         enableSystem
         disableTransitionOnChange
       >
-        <NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="flex h-screen flex-col overflow-hidden">
             <header className="items-center bg-background grid grid-cols-[1fr_auto_1fr] p-4">
               <div className="justify-self-start">

@@ -15,5 +15,31 @@
     "timeline": "Zeitleiste",
     "calendar": "Kalender",
     "map": "Karte"
+  },
+  "Timeline": {
+    "title": "Bevorstehende Läufe",
+    "filters": {
+      "search": {
+        "label": "Suche",
+        "placeholder": "Veranstaltungen suchen"
+      },
+      "distance": {
+        "label": "Distanz (km)"
+      },
+      "dateRange": {
+        "label": "Datumsbereich",
+        "placeholder": "Datum wählen",
+        "clear": "Zurücksetzen"
+      },
+      "eventTypes": {
+        "label": "Eventtyp",
+        "button": "Eventtypen",
+        "buttonSelected": "Eventtypen ({count})",
+        "clear": "Zurücksetzen"
+      }
+    },
+    "badges": {
+      "distances": "{count} Distanzen"
+    }
   }
 }

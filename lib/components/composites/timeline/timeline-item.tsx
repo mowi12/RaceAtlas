@@ -32,14 +32,26 @@ function parseLocalDate(value?: string) {
   return parsed;
 }
 
+function stripTrailingDot(value: string, locale: string) {
+  if (!value) return value;
+  if (locale.startsWith("de")) {
+    return value.replace(/\.$/, "");
+  }
+  return value;
+}
+
 function formatShortDate(date: Date, locale: string) {
   const formatter = new Intl.DateTimeFormat(locale, dateStyles);
 
   return formatter.formatToParts(date).reduce(
     (parts, part) => {
       if (part.type === "day") parts.day = part.value;
-      if (part.type === "month") parts.month = part.value;
-      if (part.type === "weekday") parts.weekday = part.value;
+      if (part.type === "month") {
+        parts.month = stripTrailingDot(part.value, locale);
+      }
+      if (part.type === "weekday") {
+        parts.weekday = stripTrailingDot(part.value, locale);
+      }
       return parts;
     },
     { weekday: "", month: "", day: "" },

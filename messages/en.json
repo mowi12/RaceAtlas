@@ -15,5 +15,31 @@
     "timeline": "Timeline",
     "calendar": "Calendar",
     "map": "Map"
+  },
+  "Timeline": {
+    "title": "Upcoming races",
+    "filters": {
+      "search": {
+        "label": "Search",
+        "placeholder": "Search events"
+      },
+      "distance": {
+        "label": "Distance (km)"
+      },
+      "dateRange": {
+        "label": "Date range",
+        "placeholder": "Pick dates",
+        "clear": "Clear"
+      },
+      "eventTypes": {
+        "label": "Event type",
+        "button": "Event types",
+        "buttonSelected": "Event types ({count})",
+        "clear": "Clear"
+      }
+    },
+    "badges": {
+      "distances": "{count} Distances"
+    }
   }
 }
