@@ -12,6 +12,7 @@ export function GithubLinkButton({ owner, repo }: GithubLinkButtonProps) {
     <IconLinkButton
       href={`https://github.com/${owner}/${repo}`}
       icon={<SimpleIcon title="GitHub" path={siGithub.path} />}
+      ariaLabel="GitHub repository"
     />
   );
 }

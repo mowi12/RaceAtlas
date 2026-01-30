@@ -14,7 +14,7 @@ export function Navigation() {
   const t = useTranslations("Navigation");
 
   return (
-    <nav>
+    <nav aria-label="Primary">
       <NavigationMenu>
         <NavigationMenuList>
           {NAV_ITEMS.map((item) => {

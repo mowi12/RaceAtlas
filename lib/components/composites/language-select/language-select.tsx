@@ -33,7 +33,7 @@ export function LanguageSelect() {
         router.replace(pathname, { locale: nextLocale });
       }}
     >
-      <SelectTrigger className="w-35">
+      <SelectTrigger className="w-35" aria-label="Language">
         <Languages />
         <SelectValue />
       </SelectTrigger>

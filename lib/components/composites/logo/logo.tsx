@@ -13,7 +13,7 @@ export function Logo({ href = "/", className }: LogoProps) {
   const preload = true;
 
   return (
-    <Link href={href}>
+    <Link href={href} aria-label="RaceAtlas home">
       <div
         className={cn("relative shrink-0 h-8", className)}
         style={{ aspectRatio: "17/4" }}
