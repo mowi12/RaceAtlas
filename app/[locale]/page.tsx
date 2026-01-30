@@ -1,23 +1,11 @@
-import { useTranslations } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
-import { use } from "react";
+import { redirect } from "@/lib/i18n/navigation";
 
-type Props = {
+export default async function LocaleIndexPage({
+  params,
+}: {
   params: Promise<{ locale: string }>;
-};
+}) {
+  const { locale } = await params;
 
-export default function Home({ params }: Props) {
-  const { locale } = use(params);
-
-  // Enable static rendering
-  setRequestLocale(locale);
-
-  const t = useTranslations("Home");
-
-  return (
-    <div>
-      <div className="brand-word">{t("title")}</div>
-      <div>{t("description")}</div>
-    </div>
-  );
+  redirect({ href: "/timeline", locale });
 }

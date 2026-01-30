@@ -10,5 +10,10 @@
   "Home": {
     "title": "RaceAtlas",
     "description": "Discover races in your area"
+  },
+  "Navigation": {
+    "timeline": "Timeline",
+    "calendar": "Calendar",
+    "map": "Map"
   }
 }

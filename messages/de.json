@@ -10,5 +10,10 @@
   "Home": {
     "title": "RaceAtlas",
     "description": "Entdecke Läufe in deiner Nähe"
+  },
+  "Navigation": {
+    "timeline": "Zeitleiste",
+    "calendar": "Kalender",
+    "map": "Karte"
   }
 }
