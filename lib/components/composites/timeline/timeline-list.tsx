@@ -14,7 +14,7 @@ export function TimelineList({ events, locale, className }: TimelineListProps) {
   const sortedEvents = sortEventsByDate(events);
 
   return (
-    <ScrollArea className={cn("h-full w-full rounded-md", className)}>
+    <ScrollArea className={cn("min-h-0 w-full flex-1 rounded-md", className)}>
       <div className="space-y-1">
         {sortedEvents.map((event) => {
           return (

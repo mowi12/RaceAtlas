@@ -12,7 +12,7 @@ export default async function TimelinePage() {
           <h1 className="text-2xl font-semibold">Upcoming races</h1>
         </header>
 
-        <div className="min-h-0 flex-1">
+        <div className="flex min-h-0 flex-1 flex-col">
           <TimelineView />
         </div>
       </section>
