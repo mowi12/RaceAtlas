@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { notFound } from "next/navigation";
-import { hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import type React from "react";
 import { ThemeProvider } from "@/lib/components/composites/theme/theme-provider";
 import { DevIndicator } from "@/lib/components/dev/dev-indicator";
@@ -53,6 +57,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   // Enable static rendering
   setRequestLocale(locale);
 
+  const messages = await getMessages();
+
   return (
     <html lang={locale} className={poppins.variable} suppressHydrationWarning>
       <body>
@@ -62,7 +68,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
         </ThemeProvider>
 
         <DevIndicator />
