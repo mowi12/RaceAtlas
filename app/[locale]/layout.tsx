@@ -53,7 +53,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         disableTransitionOnChange
       >
         <NextIntlClientProvider>
-          <div>
+          <div className="flex h-screen flex-col overflow-hidden">
             <header className="items-center bg-background grid grid-cols-[1fr_auto_1fr] p-4">
               <div className="justify-self-start">
                 <Logo />
