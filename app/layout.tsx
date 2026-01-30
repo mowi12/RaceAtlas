@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import { getLocale } from "next-intl/server";
+import type React from "react";
 
 const poppins = Poppins({
   subsets: ["latin", "latin-ext"],
