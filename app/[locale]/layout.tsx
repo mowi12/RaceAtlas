@@ -8,7 +8,12 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import type React from "react";
+import { GithubLinkButton } from "@/lib/components/composites/external-link-button/github-link-button";
+import { LanguageSelect } from "@/lib/components/composites/language-select/language-select";
+import { Logo } from "@/lib/components/composites/logo/logo";
+import { Navigation } from "@/lib/components/composites/navigation/navigation";
 import { ThemeProvider } from "@/lib/components/composites/theme/theme-provider";
+import { ThemeToggle } from "@/lib/components/composites/theme/theme-toggle";
 import { DevIndicator } from "@/lib/components/dev/dev-indicator";
 import { routing } from "@/lib/i18n/routing";
 
@@ -29,11 +34,20 @@ const poppins = Poppins({
   ],
 });
 
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
@@ -42,11 +56,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t("description"),
   };
 }
-
-type Props = {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-};
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
@@ -69,7 +78,25 @@ export default async function LocaleLayout({ children, params }: Props) {
           disableTransitionOnChange
         >
           <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
+            <div>
+              <header className="items-center bg-background grid grid-cols-[1fr_auto_1fr] p-4">
+                <div className="justify-self-start">
+                  <Logo />
+                </div>
+
+                <div className="justify-self-center">
+                  <Navigation />
+                </div>
+
+                <div className="justify-self-end flex items-center gap-2">
+                  <GithubLinkButton owner="mowi12" repo="RaceAtlas" />
+                  <LanguageSelect />
+                  <ThemeToggle />
+                </div>
+              </header>
+
+              {children}
+            </div>
           </NextIntlClientProvider>
         </ThemeProvider>
 
