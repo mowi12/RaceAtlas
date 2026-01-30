@@ -41,6 +41,9 @@ importers:
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
+      simple-icons:
+        specifier: ^16.6.1
+        version: 16.6.1
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
@@ -1885,6 +1888,10 @@ packages:
   siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}
 
+  simple-icons@16.6.1:
+    resolution: {integrity: sha512-zg3g5RCnc3cJfxCclOvElfow2rtpeB+Ow/dj1uvGG3MkpT7OjPBrE2hotqW2Hmt2ZYbuXCx2u+Oh4yi5N+yg5Q==}
+    engines: {node: '>=0.12.18'}
+
   smol-toml@1.5.2:
     resolution: {integrity: sha512-QlaZEqcAH3/RtNyet1IPIYPsEWAaYyXXv1Krsi+1L/QHppjX4Ifm8MQsBISz9vE8cHicIq3clogsheili5vhaQ==}
     engines: {node: '>= 18'}
@@ -3676,6 +3683,8 @@ snapshots:
     optional: true
 
   siginfo@2.0.0: {}
+
+  simple-icons@16.6.1: {}
 
   smol-toml@1.5.2: {}
 
