@@ -12,8 +12,6 @@ const fuseOptions: IFuseOptions<Event> = {
     { name: "name", weight: 0.7 },
     { name: "description", weight: 0.3 },
   ],
-  threshold: 0.4,
-  ignoreLocation: true,
 };
 
 /**
