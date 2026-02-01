@@ -1,12 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { fuzzySearchEvents } from "@/lib/search/event-search";
 import type { Event } from "@/lib/types/event";
+import type { LocalizedString } from "@/lib/types/i18n";
+
+const ls = (en: string, de: string): LocalizedString => ({ en, de });
 
 const events: Event[] = [
   {
     id: "1",
-    name: "City Marathon",
-    description: "Fast and flat road marathon through the city.",
+    name: ls("City Marathon", "Stadtmarathon"),
+    description: ls(
+      "Fast and flat road marathon through the city.",
+      "Schneller und flacher Straßenmarathon durch die Stadt.",
+    ),
     type: "RoadRace",
     races: [],
     date: "2026-05-15",
@@ -14,8 +20,11 @@ const events: Event[] = [
   },
   {
     id: "2",
-    name: "Trail Blast",
-    description: "Technical singletrack and mountain views.",
+    name: ls("Trail Blast", "Trail-Knaller"),
+    description: ls(
+      "Technical singletrack and mountain views.",
+      "Technischer Singletrail und Bergpanorama.",
+    ),
     type: "TrailRun",
     races: [],
     date: "2026-06-01",
@@ -23,8 +32,11 @@ const events: Event[] = [
   },
   {
     id: "3",
-    name: "Fun Run 5K",
-    description: "A friendly community event for everyone.",
+    name: ls("Fun Run 5K", "Spaßlauf 5 km"),
+    description: ls(
+      "A friendly community event for everyone.",
+      "Ein freundlicher Community-Lauf für alle.",
+    ),
     type: "FunRun",
     races: [],
     date: "2026-05-01",
@@ -59,8 +71,11 @@ describe("fuzzySearchEvents", () => {
     const weightedEvents: Event[] = [
       {
         id: "name-hit",
-        name: "Alpine Marathon",
-        description: "Scenic route with rolling hills.",
+        name: ls("Alpine Marathon", "Alpenmarathon"),
+        description: ls(
+          "Scenic route with rolling hills.",
+          "Malerische Strecke mit sanften Hügeln.",
+        ),
         type: "RoadRace",
         races: [],
         date: undefined,
@@ -68,8 +83,11 @@ describe("fuzzySearchEvents", () => {
       },
       {
         id: "desc-hit",
-        name: "Alpine Challenge",
-        description: "Includes a marathon option and shorter distances.",
+        name: ls("Alpine Challenge", "Alpen-Challenge"),
+        description: ls(
+          "Includes a marathon option and shorter distances.",
+          "Enthält eine Marathon-Option und kürzere Distanzen.",
+        ),
         type: "RoadRace",
         races: [],
         date: undefined,
@@ -79,5 +97,10 @@ describe("fuzzySearchEvents", () => {
 
     const result = fuzzySearchEvents(weightedEvents, "marathon");
     expect(result.map((e) => e.id)[0]).toBe("name-hit");
+  });
+
+  it("matches localized fields for the specified locale", () => {
+    const result = fuzzySearchEvents(events, "community", "de");
+    expect(result.map((e) => e.id)).toEqual(["3"]);
   });
 });

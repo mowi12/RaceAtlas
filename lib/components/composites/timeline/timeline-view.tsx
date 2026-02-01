@@ -45,8 +45,8 @@ export function TimelineView() {
   }, [events]);
 
   const filteredEvents = useMemo(
-    () => filterEvents(events, filters),
-    [events, filters],
+    () => filterEvents(events, { ...filters, locale }),
+    [events, filters, locale],
   );
 
   return (

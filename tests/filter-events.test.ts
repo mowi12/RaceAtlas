@@ -1,18 +1,25 @@
 import { describe, expect, it } from "vitest";
 import { filterEvents } from "@/lib/filter/filter-events";
 import type { Event } from "@/lib/types/event";
+import type { LocalizedString } from "@/lib/types/i18n";
 import type { Race } from "@/lib/types/race";
+
+const ls = (en: string, de: string): LocalizedString => ({ en, de });
 
 const race = (id: string, distanceMeters: number): Race => ({
   id,
-  name: `${distanceMeters / 1000}K`,
+  name: ls(`${distanceMeters / 1000}K`, `${distanceMeters / 1000} km`),
   distanceMeters,
 });
 
 const events: Event[] = [
   {
     id: "1",
-    name: "Fun Run",
+    name: ls("Fun Run", "Spaßlauf"),
+    description: ls(
+      "A casual run with multiple distances.",
+      "Ein lockerer Lauf mit mehreren Distanzen.",
+    ),
     type: "FunRun",
     races: [race("1-5k", 5000), race("1-10k", 10000)],
     date: "2026-05-01",
@@ -20,7 +27,11 @@ const events: Event[] = [
   },
   {
     id: "2",
-    name: "Trail Blast",
+    name: ls("Trail Blast", "Trail-Knaller"),
+    description: ls(
+      "Technical singletrack and mountain views.",
+      "Technischer Singletrail und Bergpanorama.",
+    ),
     type: "TrailRun",
     races: [race("2-21k", 21097)],
     date: "2026-06-01",
@@ -28,7 +39,11 @@ const events: Event[] = [
   },
   {
     id: "3",
-    name: "City Marathon",
+    name: ls("City Marathon", "Stadtmarathon"),
+    description: ls(
+      "Fast and flat road marathon through the city.",
+      "Schneller und flacher Straßenmarathon durch die Stadt.",
+    ),
     type: "RoadRace",
     races: [race("3-42k", 42195)],
     date: "2026-05-15",
@@ -36,7 +51,11 @@ const events: Event[] = [
   },
   {
     id: "4",
-    name: "Night Sprint",
+    name: ls("Night Sprint", "Nachtsprint"),
+    description: ls(
+      "A short evening sprint race.",
+      "Ein kurzer Sprint am Abend.",
+    ),
     type: "FunRun",
     races: [race("4-3k", 3000)],
     date: undefined,

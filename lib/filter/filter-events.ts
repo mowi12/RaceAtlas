@@ -33,7 +33,11 @@ export function filterEvents(events: Event[], filters: EventFilters): Event[] {
 
   // Fuzzy search
   if (filters.searchQuery?.trim()) {
-    result = fuzzySearchEvents(result, filters.searchQuery.trim());
+    result = fuzzySearchEvents(
+      result,
+      filters.searchQuery.trim(),
+      filters.locale,
+    );
   }
 
   const { maxDistanceKm, userLocation } = filters;

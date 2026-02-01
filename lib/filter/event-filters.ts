@@ -39,4 +39,9 @@ export interface EventFilters {
    * Fuzzy search query (name + description).
    */
   searchQuery?: string;
+
+  /**
+   * Locale used for localized text filtering.
+   */
+  locale?: string;
 }

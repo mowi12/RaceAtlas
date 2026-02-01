@@ -11,6 +11,7 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/lib/components/primitives/item";
+import { getLocalizedText } from "@/lib/i18n/localized-text";
 import { Link } from "@/lib/i18n/navigation";
 import type { Event } from "@/lib/types/event";
 
@@ -74,9 +75,20 @@ function getDistanceLabels(event: Event) {
   return unique.map(formatDistanceLabel);
 }
 
+function getNoDescriptionLabel(locale: string) {
+  if (locale.startsWith("de")) {
+    return "Keine Beschreibung vorhanden.";
+  }
+  return "No description available.";
+}
+
 export function TimelineItem({ event, locale }: TimelineItemProps) {
   const date = parseLocalDate(event.date);
   const dateParts = date ? formatShortDate(date, locale) : null;
+
+  const name = getLocalizedText(event.name, locale);
+  const description = getLocalizedText(event.description, locale);
+  const descriptionText = description || getNoDescriptionLabel(locale);
 
   return (
     <Item variant="outline" className="gap-3 bg-card/50" asChild>
@@ -100,10 +112,10 @@ export function TimelineItem({ event, locale }: TimelineItemProps) {
             </div>
           </ItemHeader>
 
-          <ItemTitle>{event.name}</ItemTitle>
-          {event.description ? (
-            <ItemDescription>{event.description}</ItemDescription>
-          ) : null}
+          <ItemTitle>{name}</ItemTitle>
+          <ItemDescription className={!description ? "italic" : undefined}>
+            {descriptionText}
+          </ItemDescription>
         </ItemContent>
 
         <ItemActions>
