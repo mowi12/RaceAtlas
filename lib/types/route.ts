@@ -1,4 +1,5 @@
 import type { GeoPoint } from "@/lib/types/geo";
+import type { LocalizedString } from "@/lib/types/i18n";
 
 /**
  * Represents the physical course of a race variant.
@@ -75,10 +76,10 @@ export interface RoutePOI {
   /**
    * Optional human-readable name (e.g., "Aid Station 2").
    */
-  name?: string;
+  name?: LocalizedString;
 
   /**
    * Optional descriptive text providing additional context.
    */
-  description?: string;
+  description?: LocalizedString;
 }

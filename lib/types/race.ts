@@ -1,3 +1,4 @@
+import type { LocalizedString } from "@/lib/types/i18n";
 import type { Route } from "@/lib/types/route";
 
 /**
@@ -23,7 +24,7 @@ export interface Race {
   /**
    * Human-readable name of the race (e.g., "10K", "Half Marathon").
    */
-  name: string;
+  name: LocalizedString;
 
   /**
    * Official race distance in meters.

@@ -7,7 +7,15 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.next",
+      "!dist",
+      "!build",
+      "!lib/components/primitives/item.tsx",
+      "!lib/components/primitives/slider.tsx"
+    ]
   },
   "formatter": {
     "enabled": true,

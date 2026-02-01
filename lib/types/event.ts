@@ -1,4 +1,5 @@
 import type { GeoPoint } from "@/lib/types/geo";
+import type { LocalizedString } from "@/lib/types/i18n";
 import type { Race } from "@/lib/types/race";
 
 /**
@@ -24,12 +25,12 @@ export interface Event {
   /**
    * Official name of the event.
    */
-  name: string;
+  name: LocalizedString;
 
   /**
    * Optional textual description providing additional context.
    */
-  description?: string;
+  description?: LocalizedString;
 
   /**
    * Optional geographic location of the event.
