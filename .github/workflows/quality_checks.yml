@@ -57,6 +57,7 @@ jobs:
           if-no-files-found: error
 
   coverage-report:
+    if: false # TODO: Disabled because of ci pipeline issues (LCOV/genhtml)
     name: Code Coverage Report
     runs-on: ubuntu-latest
     needs: test
