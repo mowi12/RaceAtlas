@@ -30,6 +30,12 @@ export interface EventFilters {
   userLocation?: GeoPoint;
 
   /**
+   * Filter events by race distance (in kilometers).
+   */
+  minRaceDistanceKm?: number;
+  maxRaceDistanceKm?: number;
+
+  /**
    * Fuzzy search query (name + description).
    */
   searchQuery?: string;
