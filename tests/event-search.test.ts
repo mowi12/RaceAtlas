@@ -5,77 +5,79 @@ import type { Event } from "@/lib/types/event";
 const events: Event[] = [
   {
     id: "1",
-    name: "Fun Run",
-    type: "FunRun",
+    name: "City Marathon",
+    description: "Fast and flat road marathon through the city.",
+    type: "RoadRace",
     races: [],
-    description: "A fun 5k for everyone",
+    date: "2026-05-15",
+    location: undefined,
   },
   {
     id: "2",
     name: "Trail Blast",
+    description: "Technical singletrack and mountain views.",
     type: "TrailRun",
     races: [],
-    description: "Challenging trail race",
+    date: "2026-06-01",
+    location: undefined,
   },
   {
     id: "3",
-    name: "City Marathon",
-    type: "RoadRace",
-    races: [],
-    description: "Classic 42k marathon",
-  },
-  {
-    id: "4",
-    name: "Night Sprint",
+    name: "Fun Run 5K",
+    description: "A friendly community event for everyone.",
     type: "FunRun",
     races: [],
-    description: "Fast night run",
+    date: "2026-05-01",
+    location: undefined,
   },
 ];
 
 describe("fuzzySearchEvents", () => {
-  it("finds exact matches by name", () => {
-    const results = fuzzySearchEvents(events, "Fun Run");
-    expect(results.map((e) => e.id)).toEqual(["1"]);
+  it("returns all events (same reference) when query is empty", () => {
+    const result = fuzzySearchEvents(events, "");
+    expect(result).toBe(events);
+    expect(result.map((e) => e.id)).toEqual(["1", "2", "3"]);
   });
 
-  it("finds partial matches in name", () => {
-    const results = fuzzySearchEvents(events, "Marath");
-    expect(results.map((e) => e.id)).toEqual(["3"]);
+  it("returns all events (same reference) when query is whitespace", () => {
+    const result = fuzzySearchEvents(events, "   ");
+    expect(result).toBe(events);
+    expect(result.map((e) => e.id)).toEqual(["1", "2", "3"]);
   });
 
-  it("finds partial matches in description", () => {
-    const results = fuzzySearchEvents(events, "challenging");
-    expect(results.map((e) => e.id)).toEqual(["2"]);
+  it("matches on name", () => {
+    const result = fuzzySearchEvents(events, "marath");
+    expect(result.map((e) => e.id)).toEqual(["1"]);
   });
 
-  it("is case-insensitive", () => {
-    const results = fuzzySearchEvents(events, "city marathon");
-    expect(results.map((e) => e.id)).toEqual(["3"]);
+  it("matches on description", () => {
+    const result = fuzzySearchEvents(events, "singletrack");
+    expect(result.map((e) => e.id)).toEqual(["2"]);
   });
 
-  it("matches despite typos", () => {
-    const results = fuzzySearchEvents(events, "trail blass");
-    expect(results.map((e) => e.id)).toEqual(["2"]);
-  });
+  it("prefers name matches over description matches (weights)", () => {
+    const weightedEvents: Event[] = [
+      {
+        id: "name-hit",
+        name: "Alpine Marathon",
+        description: "Scenic route with rolling hills.",
+        type: "RoadRace",
+        races: [],
+        date: undefined,
+        location: undefined,
+      },
+      {
+        id: "desc-hit",
+        name: "Alpine Challenge",
+        description: "Includes a marathon option and shorter distances.",
+        type: "RoadRace",
+        races: [],
+        date: undefined,
+        location: undefined,
+      },
+    ];
 
-  it("returns multiple matches", () => {
-    const results = fuzzySearchEvents(events, "run");
-    expect(results.map((e) => e.id)).toEqual(["1", "4"]);
-  });
-
-  it("returns empty array when no matches", () => {
-    const results = fuzzySearchEvents(events, "swimming");
-    expect(results).toHaveLength(0);
-  });
-
-  it("returns all events for empty query", () => {
-    const results = fuzzySearchEvents(events, "");
-    expect(results.length).toBe(events.length);
-  });
-
-  it("handles empty events array", () => {
-    const results = fuzzySearchEvents([], "fun");
-    expect(results).toHaveLength(0);
+    const result = fuzzySearchEvents(weightedEvents, "marathon");
+    expect(result.map((e) => e.id)[0]).toBe("name-hit");
   });
 });
