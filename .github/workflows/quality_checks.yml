@@ -83,7 +83,7 @@ jobs:
         run: sudo apt install lcov
 
       - name: Report Code Coverage
-        uses: zgosalvez/github-actions-report-lcov@v5
+        uses: zgosalvez/github-actions-report-lcov@v6
         with:
           coverage-files: coverage/lcov.info
           artifact-name: code-coverage-report
