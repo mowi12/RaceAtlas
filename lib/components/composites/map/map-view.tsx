@@ -107,12 +107,29 @@ export function MapView({ events, locale, onEventSelectAction }: MapViewProps) {
     });
     markersRef.current = [];
 
+    const locationCounts = new Map<string, number>();
+
     events.forEach((event) => {
       if (!event.location) return;
+      const locationKey = `${event.location.latitude.toFixed(5)}:${event.location.longitude.toFixed(5)}`;
+      const index = locationCounts.get(locationKey) ?? 0;
+      locationCounts.set(locationKey, index + 1);
+
+      const angle = (index * Math.PI * 2) / 8;
+      const ring = Math.floor(index / 8) + 1;
+      const metersOffset = 15 * ring;
+      const latOffset = (metersOffset / 111_320) * Math.cos(angle);
+      const lngOffset =
+        (metersOffset / (111_320 * Math.cos((event.location.latitude * Math.PI) / 180))) *
+        Math.sin(angle);
+
+      const adjustedLat = event.location.latitude + latOffset;
+      const adjustedLng = event.location.longitude + lngOffset;
+
       const name = getLocalizedText(event.name, locale);
       const popup = new maplibregl.Popup({ offset: 20 }).setText(name);
       const marker = new maplibregl.Marker()
-        .setLngLat([event.location.longitude, event.location.latitude])
+        .setLngLat([adjustedLng, adjustedLat])
         .setPopup(popup)
         .addTo(map);
       marker.getElement().addEventListener("click", (eventClick) => {
