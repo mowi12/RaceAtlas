@@ -7,6 +7,8 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import type React from "react";
+import { isAdminAuthenticated } from "@/lib/auth/admin";
+import { AdminTrigger } from "@/lib/components/composites/admin/admin-trigger";
 import { GithubLinkButton } from "@/lib/components/composites/external-link-button/github-link-button";
 import { LanguageSelect } from "@/lib/components/composites/language-select/language-select";
 import { Logo } from "@/lib/components/composites/logo/logo";
@@ -49,6 +51,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale);
 
   const messages = await getMessages({ locale });
+  const isAdmin = await isAdminAuthenticated();
 
   return (
     <div suppressHydrationWarning>
@@ -70,6 +73,7 @@ export default async function LocaleLayout({ children, params }: Props) {
               </div>
 
               <div className="justify-self-end flex items-center gap-2">
+                <AdminTrigger locale={locale} isAuthenticated={isAdmin} />
                 <GithubLinkButton owner="mowi12" repo="RaceAtlas" />
                 <LanguageSelect />
                 <ThemeToggle />
