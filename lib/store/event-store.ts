@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { exampleEvents } from "@/lib/data/example-events";
+import { realEvents } from "@/lib/data/real-events";
 import type { Event } from "@/lib/types/event";
 
 /**
@@ -34,7 +34,7 @@ interface EventState {
  * Hook providing access to the global event store.
  */
 export const useEventStore = create<EventState>((set) => ({
-  events: exampleEvents,
+  events: realEvents,
 
   setEvents: (events) => set({ events }),
 

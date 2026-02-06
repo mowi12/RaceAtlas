@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { exampleEvents } from "@/lib/data/example-events";
+import { realEvents } from "@/lib/data/real-events";
 import { getLocalizedText } from "@/lib/i18n/localized-text";
 import { cn } from "@/lib/utils/shadcn-helper";
 
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export function generateStaticParams() {
-  return exampleEvents.map((e) => ({ eventId: e.id }));
+  return realEvents.map((e) => ({ eventId: e.id }));
 }
 
 function getNoDescriptionLabel(locale: string) {
@@ -21,7 +21,7 @@ function getNoDescriptionLabel(locale: string) {
 export default async function EventDetailPage({ params }: Props) {
   const { eventId, locale } = await params;
 
-  const event = exampleEvents.find((e) => e.id === eventId);
+  const event = realEvents.find((e) => e.id === eventId);
   if (!event) notFound();
 
   const name = getLocalizedText(event.name, locale);

@@ -8,7 +8,14 @@ import type { Race } from "@/lib/types/race";
  * This describes the general nature of the event and is used
  * for filtering, labeling, and visual differentiation.
  */
-export type EventType = "FunRun" | "TrailRun" | "RoadRace" | "Ultra";
+export type EventType =
+  | "FunRun"
+  | "TrailRun"
+  | "RoadRace"
+  | "Ultra"
+  | "ObstacleRun"
+  | "StairRun"
+  | "Challenge";
 
 /**
  * Represents a running event that may consist of one or more race variants.
