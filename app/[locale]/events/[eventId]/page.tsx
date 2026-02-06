@@ -1,15 +1,13 @@
 import { notFound } from "next/navigation";
-import { exampleEvents } from "@/lib/data/example-events";
+import { fetchEventById } from "@/lib/data/events";
 import { getLocalizedText } from "@/lib/i18n/localized-text";
 import { cn } from "@/lib/utils/shadcn-helper";
+
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ locale: string; eventId: string }>;
 };
-
-export function generateStaticParams() {
-  return exampleEvents.map((e) => ({ eventId: e.id }));
-}
 
 function getNoDescriptionLabel(locale: string) {
   if (locale.startsWith("de")) {
@@ -21,7 +19,7 @@ function getNoDescriptionLabel(locale: string) {
 export default async function EventDetailPage({ params }: Props) {
   const { eventId, locale } = await params;
 
-  const event = exampleEvents.find((e) => e.id === eventId);
+  const event = await fetchEventById(eventId);
   if (!event) notFound();
 
   const name = getLocalizedText(event.name, locale);
