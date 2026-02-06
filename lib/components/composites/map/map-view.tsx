@@ -48,10 +48,20 @@ export function MapView() {
       attributionControl: false,
     });
 
+    const geolocate = new maplibregl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: false,
+      showUserLocation: true,
+      showAccuracyCircle: true,
+      fitBoundsOptions: { maxZoom: 13 },
+    });
+
     map.addControl(new maplibregl.AttributionControl({ compact: true }));
     map.addControl(new maplibregl.NavigationControl(), "top-right");
+    map.addControl(geolocate, "top-right");
     map.on("load", () => {
       map.resize();
+      geolocate.trigger();
     });
 
     mapRef.current = map;
