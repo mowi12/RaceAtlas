@@ -4,8 +4,8 @@ import maplibregl from "maplibre-gl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MapStyleToggle } from "@/lib/components/composites/map/map-style-toggle";
 
-const DEFAULT_CENTER: [number, number] = [0, 20];
-const DEFAULT_ZOOM = 1.6;
+const DEFAULT_CENTER: [number, number] = [9.98, 48.4];
+const DEFAULT_ZOOM = 10;
 
 const STYLE_OPTIONS = [
   {
