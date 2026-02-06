@@ -5,7 +5,7 @@ type EventTypeBadgeProps = {
   eventType: Event["type"];
 };
 
-const eventTypeBadgeStyles: Record<Event["type"], string> = {
+export const eventTypeBadgeStyles: Record<Event["type"], string> = {
   FunRun:
     "border-yellow-200 bg-yellow-100 text-yellow-900 dark:border-yellow-500/40 dark:bg-yellow-500/20 dark:text-yellow-100",
   TrailRun:
