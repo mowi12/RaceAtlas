@@ -13,8 +13,7 @@
       "!.next",
       "!dist",
       "!build",
-      "!lib/components/primitives/item.tsx",
-      "!lib/components/primitives/slider.tsx"
+      "!lib/components/primitives"
     ]
   },
   "formatter": {
