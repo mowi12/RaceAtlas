@@ -1,3 +1,4 @@
+import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import { getLocale } from "next-intl/server";
