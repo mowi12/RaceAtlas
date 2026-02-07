@@ -49,7 +49,7 @@ jobs:
       # provides the base name for the tags and labels.
       # We add the following tags
       # - version tags: for v1.2.3 -> v1, v1.2, v1.2.3
-      # - latest tags: for latest tag -> latest
+      # - latest tags: for main branch and latest tag -> latest
       - name: Extract Metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
@@ -59,7 +59,7 @@ jobs:
             type=semver,pattern=v{{version}},enable=${{ github.ref_type == 'tag' }}
             type=semver,pattern=v{{major}}.{{minor}},enable=${{ github.ref_type == 'tag' }}
             type=semver,pattern=v{{major}},enable=${{ github.ref_type == 'tag' }}
-            type=raw,value=latest,enable=${{ github.ref_type == 'tag' }}
+            type=raw,value=latest,enable=${{ github.ref_type == 'tag' || github.ref_name == 'main' }}
           flavor: |
             latest=false
 
