@@ -1,0 +1,32 @@
+name: Deploy
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+on:
+  workflow_run:
+    workflows:
+      - "Build and Publish Docker Image"
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ vars.SSH_HOST }}
+          username: ${{ vars.SSH_USER }}
+          port: ${{ vars.SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /srv/stacks/raceatlas
+            docker compose pull
+            docker compose up -d
+            docker image prune -f
