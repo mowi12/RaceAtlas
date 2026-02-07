@@ -2,8 +2,9 @@ services:
   server:
     build:
       context: .
+    env_file:
+      - .env
     environment:
       NODE_ENV: production
-      PORT: 3042
     ports:
-      - "3042:3042"
+      - "${PORT:-3042}:3000"
