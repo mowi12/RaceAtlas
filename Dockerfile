@@ -71,7 +71,8 @@ COPY --from=build /usr/src/app/public/ ./public/
 
 
 # Expose the port that the application listens on.
-EXPOSE 3000
+ENV PORT=3042
+EXPOSE 3042
 
 # Run the application.
 CMD pnpm start
