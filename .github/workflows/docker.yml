@@ -56,11 +56,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            tags: |
-              type=semver,pattern=v{{version}},enable=${{ github.ref_type == 'tag' }}
-              type=semver,pattern=v{{major}}.{{minor}},enable=${{ github.ref_type == 'tag' }}
-              type=semver,pattern=v{{major}},enable=${{ github.ref_type == 'tag' }}
-              type=raw,value=latest,enable=${{ github.ref_type == 'tag' }}
+            type=semver,pattern=v{{version}},enable=${{ github.ref_type == 'tag' }}
+            type=semver,pattern=v{{major}}.{{minor}},enable=${{ github.ref_type == 'tag' }}
+            type=semver,pattern=v{{major}},enable=${{ github.ref_type == 'tag' }}
+            type=raw,value=latest,enable=${{ github.ref_type == 'tag' }}
           flavor: |
             latest=false
 
