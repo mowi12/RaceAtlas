@@ -24,7 +24,10 @@ type AdminTriggerProps = {
 export function AdminTrigger({ locale, isAuthenticated }: AdminTriggerProps) {
   const pathname = usePathname() ?? "";
   const normalized = pathname.replace(/\/$/, "");
-  const isOnAdmin = normalized === `/${locale}/admin`;
+  const isOnAdmin =
+    normalized === "/admin" ||
+    normalized === `/${locale}/admin` ||
+    /\/admin$/.test(normalized);
 
   if (isOnAdmin) {
     return (
