@@ -16,6 +16,115 @@
     "calendar": "Kalender",
     "map": "Karte"
   },
+  "Admin": {
+    "trigger": {
+      "aria": {
+        "admin": "Zum Admin",
+        "login": "Admin-Login öffnen"
+      }
+    },
+    "auth": {
+      "title": "Admin-Zugang",
+      "description": "Gib das Admin-Passwort ein, um fortzufahren.",
+      "passwordLabel": "Passwort",
+      "continue": "Weiter"
+    },
+    "header": {
+      "kicker": "Admin",
+      "titleEvent": "Event anlegen",
+      "titleRace": "Rennen hinzufügen",
+      "titleDelete": "Daten löschen"
+    },
+    "toggle": {
+      "createEvent": "Event anlegen",
+      "addRace": "Rennen hinzufügen",
+      "delete": "Löschen"
+    },
+    "event": {
+      "sectionTitle": "Event-Details",
+      "id": "Event-ID",
+      "date": "Event-Datum",
+      "datePlaceholder": "Datum auswählen",
+      "nameEn": "Name (EN)",
+      "nameDe": "Name (DE)",
+      "descriptionEn": "Beschreibung (EN)",
+      "descriptionDe": "Beschreibung (DE)",
+      "type": "Eventtyp",
+      "typePlaceholder": "Typ auswählen",
+      "types": {
+        "FunRun": "Fun Run",
+        "TrailRun": "Trail Run",
+        "RoadRace": "Straßenlauf",
+        "Ultra": "Ultra"
+      },
+      "externalLink": "Externer Link",
+      "latitude": "Breitengrad",
+      "longitude": "Längengrad",
+      "submit": "Event anlegen"
+    },
+    "races": {
+      "sectionTitle": "Rennen",
+      "title": "Rennen {index}",
+      "remove": "Entfernen",
+      "id": "Rennen-ID",
+      "distance": "Distanz (m)",
+      "nameEn": "Name (EN)",
+      "nameDe": "Name (DE)",
+      "elevation": "Höhenmeter (m)",
+      "startTime": "Startzeit",
+      "startDatePlaceholder": "Datum auswählen",
+      "startTimePlaceholder": "Zeit",
+      "difficulty": "Schwierigkeit",
+      "difficultyPlaceholder": "Schwierigkeit auswählen",
+      "difficulties": {
+        "Easy": "Leicht",
+        "Medium": "Mittel",
+        "Hard": "Schwer",
+        "Extreme": "Extrem"
+      },
+      "addAnother": "Weiteres Rennen hinzufügen"
+    },
+    "addRace": {
+      "event": "Event",
+      "eventPlaceholder": "Event auswählen",
+      "id": "Rennen-ID",
+      "nameEn": "Name (EN)",
+      "nameDe": "Name (DE)",
+      "distance": "Distanz (m)",
+      "elevation": "Höhenmeter (m)",
+      "startTime": "Startzeit",
+      "startDatePlaceholder": "Datum auswählen",
+      "startTimePlaceholder": "Zeit",
+      "difficulty": "Schwierigkeit",
+      "difficultyPlaceholder": "Schwierigkeit auswählen",
+      "submit": "Rennen hinzufügen"
+    },
+    "delete": {
+      "type": "Löschen",
+      "typePlaceholder": "Typ auswählen",
+      "typeEvent": "Event",
+      "typeRace": "Rennen",
+      "event": "Event",
+      "eventPlaceholder": "Event auswählen",
+      "race": "Rennen",
+      "racePlaceholder": "Rennen auswählen",
+      "warning": "Beim Löschen eines Events werden alle zugehörigen Rennen entfernt.",
+      "submit": "Löschen"
+    },
+    "status": {
+      "ok": "Event angelegt.",
+      "deleted": "Gelöscht.",
+      "badPassword": "Passwort falsch.",
+      "unauthorized": "Nicht autorisiert.",
+      "missingRequired": "Bitte alle Pflichtfelder ausfüllen.",
+      "invalidLocation": "Ungültige Breite/Länge.",
+      "invalidType": "Ungültiger Eventtyp.",
+      "invalidDifficulty": "Ungültige Schwierigkeit.",
+      "invalidElevation": "Höhenmeter müssen eine Zahl sein.",
+      "error": "Etwas ist schiefgelaufen.",
+      "errorWithMessage": "Fehler: {message}"
+    }
+  },
   "Timeline": {
     "title": "Bevorstehende Läufe",
     "filters": {

@@ -6,12 +6,14 @@ import { TimelineFilterBar } from "@/lib/components/composites/timeline/timeline
 import { TimelineList } from "@/lib/components/composites/timeline/timeline-list";
 import type { EventFilters } from "@/lib/filter/event-filters";
 import { filterEvents } from "@/lib/filter/filter-events";
-import { useEventStore } from "@/lib/store/event-store";
-import type { EventType } from "@/lib/types/event";
+import type { Event, EventType } from "@/lib/types/event";
 
-export function TimelineView() {
+type TimelineViewProps = {
+  events: Event[];
+};
+
+export function TimelineView({ events }: TimelineViewProps) {
   const locale = useLocale();
-  const events = useEventStore((state) => state.events);
   const [filters, setFilters] = useState<EventFilters>({});
 
   const distanceBoundsKm = useMemo(() => {

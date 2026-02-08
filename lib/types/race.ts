@@ -7,7 +7,8 @@ import type { Route } from "@/lib/types/route";
  * This is a coarse, human-facing classification intended for quick comparison.
  * It is not meant to replace objective metrics such as distance or elevation gain.
  */
-export type RaceDifficulty = "Easy" | "Medium" | "Hard" | "Extreme";
+export const RACE_DIFFICULTIES = ["Easy", "Medium", "Hard", "Extreme"] as const;
+export type RaceDifficulty = (typeof RACE_DIFFICULTIES)[number];
 
 /**
  * Represents a runnable distance variant within an event.

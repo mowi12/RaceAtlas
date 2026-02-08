@@ -16,6 +16,115 @@
     "calendar": "Calendar",
     "map": "Map"
   },
+  "Admin": {
+    "trigger": {
+      "aria": {
+        "admin": "Go to admin",
+        "login": "Open admin login"
+      }
+    },
+    "auth": {
+      "title": "Admin access",
+      "description": "Enter the admin password to continue.",
+      "passwordLabel": "Password",
+      "continue": "Continue"
+    },
+    "header": {
+      "kicker": "Admin",
+      "titleEvent": "Create event",
+      "titleRace": "Add race",
+      "titleDelete": "Delete data"
+    },
+    "toggle": {
+      "createEvent": "Create event",
+      "addRace": "Add race",
+      "delete": "Delete"
+    },
+    "event": {
+      "sectionTitle": "Event details",
+      "id": "Event ID",
+      "date": "Event date",
+      "datePlaceholder": "Select date",
+      "nameEn": "Name (EN)",
+      "nameDe": "Name (DE)",
+      "descriptionEn": "Description (EN)",
+      "descriptionDe": "Description (DE)",
+      "type": "Event type",
+      "typePlaceholder": "Select type",
+      "types": {
+        "FunRun": "Fun run",
+        "TrailRun": "Trail run",
+        "RoadRace": "Road race",
+        "Ultra": "Ultra"
+      },
+      "externalLink": "External link",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "submit": "Add event"
+    },
+    "races": {
+      "sectionTitle": "Races",
+      "title": "Race {index}",
+      "remove": "Remove",
+      "id": "Race ID",
+      "distance": "Distance (m)",
+      "nameEn": "Name (EN)",
+      "nameDe": "Name (DE)",
+      "elevation": "Elevation gain (m)",
+      "startTime": "Start time",
+      "startDatePlaceholder": "Select date",
+      "startTimePlaceholder": "Time",
+      "difficulty": "Difficulty",
+      "difficultyPlaceholder": "Select difficulty",
+      "difficulties": {
+        "Easy": "Easy",
+        "Medium": "Medium",
+        "Hard": "Hard",
+        "Extreme": "Extreme"
+      },
+      "addAnother": "Add another race"
+    },
+    "addRace": {
+      "event": "Event",
+      "eventPlaceholder": "Select event",
+      "id": "Race ID",
+      "nameEn": "Name (EN)",
+      "nameDe": "Name (DE)",
+      "distance": "Distance (m)",
+      "elevation": "Elevation gain (m)",
+      "startTime": "Start time",
+      "startDatePlaceholder": "Select date",
+      "startTimePlaceholder": "Time",
+      "difficulty": "Difficulty",
+      "difficultyPlaceholder": "Select difficulty",
+      "submit": "Add race"
+    },
+    "delete": {
+      "type": "Delete",
+      "typePlaceholder": "Select type",
+      "typeEvent": "Event",
+      "typeRace": "Race",
+      "event": "Event",
+      "eventPlaceholder": "Select event",
+      "race": "Race",
+      "racePlaceholder": "Select race",
+      "warning": "Deleting an event will also remove all races linked to it.",
+      "submit": "Delete"
+    },
+    "status": {
+      "ok": "Event created.",
+      "deleted": "Deleted.",
+      "badPassword": "Incorrect password.",
+      "unauthorized": "Not authorized.",
+      "missingRequired": "Please fill in all required fields.",
+      "invalidLocation": "Invalid latitude/longitude.",
+      "invalidType": "Invalid event type.",
+      "invalidDifficulty": "Invalid race difficulty.",
+      "invalidElevation": "Elevation must be a number.",
+      "error": "Something went wrong.",
+      "errorWithMessage": "Error: {message}"
+    }
+  },
   "Timeline": {
     "title": "Upcoming races",
     "filters": {
