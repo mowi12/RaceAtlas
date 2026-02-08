@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AdminAddRaceForm } from "@/lib/components/composites/admin/admin-add-race-form";
 import { AdminAuthDialog } from "@/lib/components/composites/admin/admin-auth-dialog";
 import { AdminDeleteForm } from "@/lib/components/composites/admin/admin-delete-form";
@@ -27,6 +27,11 @@ export function AdminPage({
   raceOptions,
 }: AdminPageProps) {
   const [mode, setMode] = useState<"event" | "race" | "delete">("event");
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    fetch("/api/admin/refresh", { method: "POST" }).catch(() => null);
+  }, [isAuthenticated]);
 
   return (
     <ScrollArea className="h-full p-4">

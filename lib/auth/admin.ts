@@ -3,13 +3,23 @@ import crypto from "node:crypto";
 import { cookies } from "next/headers";
 
 const COOKIE_NAME = "raceatlas_admin";
-const MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
+const DEFAULT_MAX_AGE_SECONDS = 60 * 10;
 
 /**
  * Returns the secret used to sign the admin session cookie.
  */
 function getAdminSecret() {
   return process.env.ADMIN_COOKIE_SECRET ?? process.env.ADMIN_PASSWORD ?? "";
+}
+
+function getMaxAgeSeconds() {
+  const raw = process.env.ADMIN_SESSION_MAX_AGE_SECONDS;
+  if (!raw) return DEFAULT_MAX_AGE_SECONDS;
+  const parsed = Number(raw);
+  if (!Number.isFinite(parsed) || parsed <= 0) {
+    return DEFAULT_MAX_AGE_SECONDS;
+  }
+  return Math.floor(parsed);
 }
 
 /**
@@ -28,6 +38,7 @@ export async function createAdminSession() {
     throw new Error("Missing ADMIN_PASSWORD or ADMIN_COOKIE_SECRET.");
   }
 
+  const maxAgeSeconds = getMaxAgeSeconds();
   const issuedAt = Date.now().toString();
   const signature = signToken(issuedAt, secret);
   const token = `${issuedAt}.${signature}`;
@@ -37,7 +48,7 @@ export async function createAdminSession() {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    maxAge: MAX_AGE_SECONDS,
+    maxAge: maxAgeSeconds,
     path: "/",
   });
 }
@@ -77,5 +88,5 @@ export async function isAdminAuthenticated(): Promise<boolean> {
   }
 
   const ageSeconds = (Date.now() - Number(issuedAt)) / 1000;
-  return !(!Number.isFinite(ageSeconds) || ageSeconds > MAX_AGE_SECONDS);
+  return !(!Number.isFinite(ageSeconds) || ageSeconds > getMaxAgeSeconds());
 }
