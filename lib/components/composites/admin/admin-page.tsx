@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { AdminAddRaceForm } from "@/lib/components/composites/admin/admin-add-race-form";
 import { AdminAuthDialog } from "@/lib/components/composites/admin/admin-auth-dialog";
@@ -26,6 +27,7 @@ export function AdminPage({
   eventOptions,
   raceOptions,
 }: AdminPageProps) {
+  const t = useTranslations("Admin");
   const [mode, setMode] = useState<"event" | "race" | "delete">("event");
 
   useEffect(() => {
@@ -37,13 +39,13 @@ export function AdminPage({
     <ScrollArea className="h-full p-4">
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-6">
         <header className="space-y-1">
-          <p className="text-sm text-muted-foreground">Admin</p>
+          <p className="text-sm text-muted-foreground">{t("header.kicker")}</p>
           <h1 className="text-2xl font-semibold">
             {mode === "event"
-              ? "Add Event"
+              ? t("header.titleEvent")
               : mode === "race"
-                ? "Add Race"
-                : "Delete"}
+                ? t("header.titleRace")
+                : t("header.titleDelete")}
           </h1>
         </header>
 
@@ -53,7 +55,7 @@ export function AdminPage({
 
         {isAuthenticated ? (
           <div className="space-y-6">
-            <AdminModeToggle mode={mode} onChange={setMode} />
+            <AdminModeToggle mode={mode} onChangeAction={setMode} />
             {mode === "event" ? (
               <AdminEventForm locale={locale} />
             ) : mode === "race" ? (

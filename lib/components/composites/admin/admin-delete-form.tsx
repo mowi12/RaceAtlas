@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { adminDeleteAction } from "@/lib/actions/admin";
 import { Button } from "@/lib/components/primitives/button";
@@ -23,6 +24,7 @@ export function AdminDeleteForm({
   eventOptions,
   raceOptions,
 }: AdminDeleteFormProps) {
+  const t = useTranslations("Admin");
   const [kind, setKind] = useState<"event" | "race">("event");
   const [eventId, setEventId] = useState("");
   const [raceId, setRaceId] = useState("");
@@ -38,31 +40,31 @@ export function AdminDeleteForm({
 
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <Label>Delete *</Label>
+          <Label>{t("delete.type")}</Label>
           <Select
             value={kind}
             onValueChange={(value) => setKind(value as "event" | "race")}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Select type" />
+              <SelectValue placeholder={t("delete.typePlaceholder")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="event">Event</SelectItem>
-              <SelectItem value="race">Race</SelectItem>
+              <SelectItem value="event">{t("delete.typeEvent")}</SelectItem>
+              <SelectItem value="race">{t("delete.typeRace")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         {kind === "event" ? (
           <div className="space-y-2">
-            <Label>Event *</Label>
+            <Label>{t("delete.event")}</Label>
             <input type="hidden" name="event_id" value={eventId} />
             <Select
               value={eventId}
               onValueChange={(value) => setEventId(value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select event" />
+                <SelectValue placeholder={t("delete.eventPlaceholder")} />
               </SelectTrigger>
               <SelectContent>
                 {eventOptions.map((event) => (
@@ -75,11 +77,11 @@ export function AdminDeleteForm({
           </div>
         ) : (
           <div className="space-y-2">
-            <Label>Race *</Label>
+            <Label>{t("delete.race")}</Label>
             <input type="hidden" name="race_id" value={raceId} />
             <Select value={raceId} onValueChange={(value) => setRaceId(value)}>
               <SelectTrigger>
-                <SelectValue placeholder="Select race" />
+                <SelectValue placeholder={t("delete.racePlaceholder")} />
               </SelectTrigger>
               <SelectContent>
                 {raceOptions.map((race) => (
@@ -94,12 +96,12 @@ export function AdminDeleteForm({
       </div>
 
       <div className="rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
-        Deleting an event will also delete all associated races.
+        {t("delete.warning")}
       </div>
 
       <div className="flex justify-end">
         <Button type="submit" variant="destructive" disabled={!canSubmit}>
-          Delete
+          {t("delete.submit")}
         </Button>
       </div>
     </form>

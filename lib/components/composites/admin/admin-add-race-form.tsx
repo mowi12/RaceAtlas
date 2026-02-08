@@ -1,7 +1,9 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { adminAddRaceAction } from "@/lib/actions/admin";
+import { AdminDateTimePicker } from "@/lib/components/composites/admin/admin-date-input";
 import { Button } from "@/lib/components/primitives/button";
 import { Input } from "@/lib/components/primitives/input";
 import { Label } from "@/lib/components/primitives/label";
@@ -25,6 +27,7 @@ export function AdminAddRaceForm({
   locale,
   eventOptions,
 }: AdminAddRaceFormProps) {
+  const t = useTranslations("Admin");
   const [addRaceEventId, setAddRaceEventId] = useState("");
   const [addRace, setAddRace] = useState({
     id: "",
@@ -53,14 +56,14 @@ export function AdminAddRaceForm({
       <input type="hidden" name="locale" value={locale} />
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <Label>Event *</Label>
+          <Label>{t("addRace.event")}</Label>
           <input type="hidden" name="event_id" value={addRaceEventId} />
           <Select
             value={addRaceEventId}
             onValueChange={(value) => setAddRaceEventId(value)}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Select event" />
+              <SelectValue placeholder={t("addRace.eventPlaceholder")} />
             </SelectTrigger>
             <SelectContent>
               {eventOptions.map((event) => (
@@ -72,7 +75,7 @@ export function AdminAddRaceForm({
           </Select>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="add-race-id">Race ID *</Label>
+          <Label htmlFor="add-race-id">{t("addRace.id")}</Label>
           <Input
             id="add-race-id"
             name="race_id"
@@ -87,7 +90,7 @@ export function AdminAddRaceForm({
 
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="add-race-name-en">Name (EN) *</Label>
+          <Label htmlFor="add-race-name-en">{t("addRace.nameEn")}</Label>
           <Input
             id="add-race-name-en"
             name="race_name_en"
@@ -102,7 +105,7 @@ export function AdminAddRaceForm({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="add-race-name-de">Name (DE) *</Label>
+          <Label htmlFor="add-race-name-de">{t("addRace.nameDe")}</Label>
           <Input
             id="add-race-name-de"
             name="race_name_de"
@@ -120,7 +123,7 @@ export function AdminAddRaceForm({
 
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="add-race-distance">Distance (meters) *</Label>
+          <Label htmlFor="add-race-distance">{t("addRace.distance")}</Label>
           <Input
             id="add-race-distance"
             name="race_distance"
@@ -137,7 +140,7 @@ export function AdminAddRaceForm({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="add-race-elevation">Elevation gain (meters)</Label>
+          <Label htmlFor="add-race-elevation">{t("addRace.elevation")}</Label>
           <Input
             id="add-race-elevation"
             name="race_elevation"
@@ -156,18 +159,18 @@ export function AdminAddRaceForm({
 
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="add-race-start">Start time</Label>
-          <Input
-            id="add-race-start"
-            name="race_start_time_local"
-            type="datetime-local"
+          <Label>{t("addRace.startTime")}</Label>
+          <AdminDateTimePicker
             value={addRace.startTime}
-            onChange={(e) =>
+            onChangeAction={(value) =>
               setAddRace((current) => ({
                 ...current,
-                startTime: e.target.value,
+                startTime: value,
               }))
             }
+            locale={locale}
+            datePlaceholder={t("addRace.startDatePlaceholder")}
+            timePlaceholder={t("addRace.startTimePlaceholder")}
           />
           <input
             type="hidden"
@@ -178,7 +181,7 @@ export function AdminAddRaceForm({
           />
         </div>
         <div className="space-y-2">
-          <Label>Difficulty</Label>
+          <Label>{t("addRace.difficulty")}</Label>
           <input
             type="hidden"
             name="race_difficulty"
@@ -194,12 +197,12 @@ export function AdminAddRaceForm({
             }
           >
             <SelectTrigger>
-              <SelectValue placeholder="Select difficulty" />
+              <SelectValue placeholder={t("addRace.difficultyPlaceholder")} />
             </SelectTrigger>
             <SelectContent>
               {DIFFICULTIES.map((diff) => (
                 <SelectItem key={diff} value={diff}>
-                  {diff}
+                  {t(`races.difficulties.${diff}`)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -209,7 +212,7 @@ export function AdminAddRaceForm({
 
       <div className="flex justify-end">
         <Button type="submit" disabled={!canSubmitAddRace}>
-          Add race
+          {t("addRace.submit")}
         </Button>
       </div>
     </form>

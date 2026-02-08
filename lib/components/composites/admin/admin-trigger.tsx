@@ -1,6 +1,7 @@
 "use client";
 
 import { Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { adminLoginAction } from "@/lib/actions/admin";
 import { Button } from "@/lib/components/primitives/button";
 import {
@@ -22,6 +23,7 @@ type AdminTriggerProps = {
 };
 
 export function AdminTrigger({ locale, isAuthenticated }: AdminTriggerProps) {
+  const t = useTranslations("Admin");
   const pathname = usePathname() ?? "";
   const normalized = pathname.replace(/\/$/, "");
   const isOnAdmin =
@@ -31,7 +33,12 @@ export function AdminTrigger({ locale, isAuthenticated }: AdminTriggerProps) {
 
   if (isOnAdmin) {
     return (
-      <Button variant="outline" size="icon" aria-label="Go to admin" disabled>
+      <Button
+        variant="outline"
+        size="icon"
+        aria-label={t("trigger.aria.admin")}
+        disabled
+      >
         <Plus className="h-4 w-4" />
       </Button>
     );
@@ -39,7 +46,12 @@ export function AdminTrigger({ locale, isAuthenticated }: AdminTriggerProps) {
 
   if (isAuthenticated) {
     return (
-      <Button variant="outline" size="icon" aria-label="Go to admin" asChild>
+      <Button
+        variant="outline"
+        size="icon"
+        aria-label={t("trigger.aria.admin")}
+        asChild
+      >
         <Link href="/admin">
           <Plus className="h-4 w-4" />
         </Link>
@@ -53,7 +65,7 @@ export function AdminTrigger({ locale, isAuthenticated }: AdminTriggerProps) {
         <Button
           variant="outline"
           size="icon"
-          aria-label="Open admin login"
+          aria-label={t("trigger.aria.login")}
           disabled={isOnAdmin}
         >
           <Plus className="h-4 w-4" />
@@ -61,15 +73,13 @@ export function AdminTrigger({ locale, isAuthenticated }: AdminTriggerProps) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Admin access</DialogTitle>
-          <DialogDescription>
-            Enter the admin password to continue.
-          </DialogDescription>
+          <DialogTitle>{t("auth.title")}</DialogTitle>
+          <DialogDescription>{t("auth.description")}</DialogDescription>
         </DialogHeader>
         <form action={adminLoginAction} className="space-y-4">
           <input type="hidden" name="locale" value={locale} />
           <div className="space-y-2">
-            <Label htmlFor="admin-password">Password</Label>
+            <Label htmlFor="admin-password">{t("auth.passwordLabel")}</Label>
             <Input
               id="admin-password"
               name="password"
@@ -78,7 +88,7 @@ export function AdminTrigger({ locale, isAuthenticated }: AdminTriggerProps) {
             />
           </div>
           <DialogFooter>
-            <Button type="submit">Continue</Button>
+            <Button type="submit">{t("auth.continue")}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

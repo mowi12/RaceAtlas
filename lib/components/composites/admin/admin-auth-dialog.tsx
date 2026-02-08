@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { adminLoginAction } from "@/lib/actions/admin";
 import { Button } from "@/lib/components/primitives/button";
 import {
@@ -18,19 +19,20 @@ type AdminAuthDialogProps = {
 };
 
 export function AdminAuthDialog({ locale }: AdminAuthDialogProps) {
+  const t = useTranslations("Admin");
   return (
     <Dialog open>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Admin access</DialogTitle>
-          <DialogDescription>
-            Enter the admin password to continue.
-          </DialogDescription>
+          <DialogTitle>{t("auth.title")}</DialogTitle>
+          <DialogDescription>{t("auth.description")}</DialogDescription>
         </DialogHeader>
         <form action={adminLoginAction} className="space-y-4">
           <input type="hidden" name="locale" value={locale} />
           <div className="space-y-2">
-            <Label htmlFor="admin-password-page">Password</Label>
+            <Label htmlFor="admin-password-page">
+              {t("auth.passwordLabel")}
+            </Label>
             <Input
               id="admin-password-page"
               name="password"
@@ -39,7 +41,7 @@ export function AdminAuthDialog({ locale }: AdminAuthDialogProps) {
             />
           </div>
           <DialogFooter>
-            <Button type="submit">Continue</Button>
+            <Button type="submit">{t("auth.continue")}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

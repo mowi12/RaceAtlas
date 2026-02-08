@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
 
@@ -9,6 +10,7 @@ type AdminStatusProps = {
 };
 
 export function AdminStatus({ status, message }: AdminStatusProps) {
+  const t = useTranslations("Admin");
   const lastStatus = useRef<string | undefined>(undefined);
 
   useEffect(() => {
@@ -17,39 +19,43 @@ export function AdminStatus({ status, message }: AdminStatusProps) {
 
     switch (status) {
       case "ok":
-        toast.success("Event added.");
+        toast.success(t("status.ok"));
         break;
       case "deleted":
-        toast.success("Deleted.");
+        toast.success(t("status.deleted"));
         break;
       case "bad-password":
-        toast.error("Wrong password.");
+        toast.error(t("status.badPassword"));
         break;
       case "unauthorized":
-        toast.error("You are not authorized to perform this action.");
+        toast.error(t("status.unauthorized"));
         break;
       case "missing-required":
-        toast.error("Please fill out all required fields.");
+        toast.error(t("status.missingRequired"));
         break;
       case "invalid-location":
-        toast.error("Latitude/longitude must be valid numbers.");
+        toast.error(t("status.invalidLocation"));
         break;
       case "invalid-type":
-        toast.error("Event type is invalid.");
+        toast.error(t("status.invalidType"));
         break;
       case "invalid-difficulty":
-        toast.error("Race difficulty is invalid.");
+        toast.error(t("status.invalidDifficulty"));
         break;
       case "invalid-elevation":
-        toast.error("Elevation gain must be a valid number.");
+        toast.error(t("status.invalidElevation"));
         break;
       case "error":
-        toast.error(message ? `Insert failed: ${message}` : "Insert failed.");
+        toast.error(
+          message
+            ? t("status.errorWithMessage", { message })
+            : t("status.error"),
+        );
         break;
       default:
         break;
     }
-  }, [status, message]);
+  }, [status, message, t]);
 
   return null;
 }

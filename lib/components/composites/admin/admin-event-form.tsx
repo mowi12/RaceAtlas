@@ -1,7 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { adminCreateEventAction } from "@/lib/actions/admin";
+import {
+  AdminDatePicker,
+  AdminDateTimePicker,
+} from "@/lib/components/composites/admin/admin-date-input";
 import { Button } from "@/lib/components/primitives/button";
 import { Input } from "@/lib/components/primitives/input";
 import { Label } from "@/lib/components/primitives/label";
@@ -49,6 +54,7 @@ function createRaceDraft(): RaceDraft {
 }
 
 export function AdminEventForm({ locale }: AdminEventFormProps) {
+  const t = useTranslations("Admin");
   const [eventType, setEventType] = useState<EventType | "">("");
   const [eventId, setEventId] = useState("");
   const [eventNameEn, setEventNameEn] = useState("");
@@ -92,10 +98,10 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
       <input type="hidden" name="locale" value={locale} />
 
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold">Event</h2>
+        <h2 className="text-lg font-semibold">{t("event.sectionTitle")}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="event-id">Event ID *</Label>
+            <Label htmlFor="event-id">{t("event.id")}</Label>
             <Input
               id="event-id"
               name="event_id"
@@ -105,21 +111,20 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="event-date">Date *</Label>
-            <Input
-              id="event-date"
-              name="event_date"
-              type="date"
-              required
+            <Label>{t("event.date")}</Label>
+            <input type="hidden" name="event_date" value={eventDate} />
+            <AdminDatePicker
               value={eventDate}
-              onChange={(e) => setEventDate(e.target.value)}
+              onChangeAction={setEventDate}
+              locale={locale}
+              placeholder={t("event.datePlaceholder")}
             />
           </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="event-name-en">Name (EN) *</Label>
+            <Label htmlFor="event-name-en">{t("event.nameEn")}</Label>
             <Input
               id="event-name-en"
               name="event_name_en"
@@ -129,7 +134,7 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="event-name-de">Name (DE) *</Label>
+            <Label htmlFor="event-name-de">{t("event.nameDe")}</Label>
             <Input
               id="event-name-de"
               name="event_name_de"
@@ -142,7 +147,9 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
 
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="event-description-en">Description (EN)</Label>
+            <Label htmlFor="event-description-en">
+              {t("event.descriptionEn")}
+            </Label>
             <Textarea
               id="event-description-en"
               name="event_description_en"
@@ -150,7 +157,9 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="event-description-de">Description (DE)</Label>
+            <Label htmlFor="event-description-de">
+              {t("event.descriptionDe")}
+            </Label>
             <Textarea
               id="event-description-de"
               name="event_description_de"
@@ -161,33 +170,33 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
 
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
-            <Label>Type *</Label>
+            <Label>{t("event.type")}</Label>
             <input type="hidden" name="event_type" value={eventType} />
             <Select
               value={eventType}
               onValueChange={(value) => setEventType(value as EventType)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select event type" />
+                <SelectValue placeholder={t("event.typePlaceholder")} />
               </SelectTrigger>
               <SelectContent>
                 {EVENT_TYPES_LIST.map((type) => (
                   <SelectItem key={type} value={type}>
-                    {type}
+                    {t(`event.types.${type}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="event-external">External link</Label>
+            <Label htmlFor="event-external">{t("event.externalLink")}</Label>
             <Input id="event-external" name="event_external_link" type="url" />
           </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="event-lat">Latitude</Label>
+            <Label htmlFor="event-lat">{t("event.latitude")}</Label>
             <Input
               id="event-lat"
               name="event_latitude"
@@ -196,7 +205,7 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="event-lng">Longitude</Label>
+            <Label htmlFor="event-lng">{t("event.longitude")}</Label>
             <Input
               id="event-lng"
               name="event_longitude"
@@ -210,27 +219,28 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
       <Separator />
 
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold">Races</h2>
+        <h2 className="text-lg font-semibold">{t("races.sectionTitle")}</h2>
         <div className="space-y-6">
           {races.map((race, index) => (
             <div key={race.key} className="space-y-4 rounded-lg border p-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-base font-semibold">Race {index + 1}</h3>
-                {races.length > 1 ? (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => removeRace(index)}
-                  >
-                    Remove
-                  </Button>
-                ) : null}
+                <h3 className="text-base font-semibold">
+                  {t("races.title", { index: index + 1 })}
+                </h3>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => removeRace(index)}
+                  disabled={races.length === 1}
+                >
+                  {t("races.remove")}
+                </Button>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor={`race-id-${index}`}>Race ID *</Label>
+                  <Label htmlFor={`race-id-${index}`}>{t("races.id")}</Label>
                   <Input
                     id={`race-id-${index}`}
                     name="race_id"
@@ -241,7 +251,7 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor={`race-distance-${index}`}>
-                    Distance (meters) *
+                    {t("races.distance")}
                   </Label>
                   <Input
                     id={`race-distance-${index}`}
@@ -259,7 +269,9 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
 
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor={`race-name-en-${index}`}>Name (EN) *</Label>
+                  <Label htmlFor={`race-name-en-${index}`}>
+                    {t("races.nameEn")}
+                  </Label>
                   <Input
                     id={`race-name-en-${index}`}
                     name="race_name_en"
@@ -271,7 +283,9 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor={`race-name-de-${index}`}>Name (DE) *</Label>
+                  <Label htmlFor={`race-name-de-${index}`}>
+                    {t("races.nameDe")}
+                  </Label>
                   <Input
                     id={`race-name-de-${index}`}
                     name="race_name_de"
@@ -287,7 +301,7 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor={`race-elevation-${index}`}>
-                    Elevation gain (meters)
+                    {t("races.elevation")}
                   </Label>
                   <Input
                     id={`race-elevation-${index}`}
@@ -301,15 +315,15 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor={`race-start-${index}`}>Start time</Label>
-                  <Input
-                    id={`race-start-${index}`}
-                    name="race_start_time_local"
-                    type="datetime-local"
+                  <Label>{t("races.startTime")}</Label>
+                  <AdminDateTimePicker
                     value={race.startTime}
-                    onChange={(e) =>
-                      updateRace(index, { startTime: e.target.value })
+                    onChangeAction={(value) =>
+                      updateRace(index, { startTime: value })
                     }
+                    locale={locale}
+                    datePlaceholder={t("races.startDatePlaceholder")}
+                    timePlaceholder={t("races.startTimePlaceholder")}
                   />
                   <input
                     type="hidden"
@@ -324,7 +338,7 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
               </div>
 
               <div className="space-y-2">
-                <Label>Difficulty</Label>
+                <Label>{t("races.difficulty")}</Label>
                 <input
                   type="hidden"
                   name="race_difficulty"
@@ -337,12 +351,14 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select difficulty" />
+                    <SelectValue
+                      placeholder={t("races.difficultyPlaceholder")}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {DIFFICULTIES.map((diff) => (
                       <SelectItem key={diff} value={diff}>
-                        {diff}
+                        {t(`races.difficulties.${diff}`)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -353,13 +369,13 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
         </div>
 
         <Button type="button" variant="outline" onClick={addRaceBlock}>
-          Add another race
+          {t("races.addAnother")}
         </Button>
       </section>
 
       <div className="flex justify-end">
         <Button type="submit" disabled={!canSubmit}>
-          Add event
+          {t("event.submit")}
         </Button>
       </div>
     </form>

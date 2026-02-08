@@ -1,13 +1,18 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Button } from "@/lib/components/primitives/button";
 
 type AdminModeToggleProps = {
   mode: "event" | "race" | "delete";
-  onChange: (mode: "event" | "race" | "delete") => void;
+  onChangeAction: (mode: "event" | "race" | "delete") => void;
 };
 
-export function AdminModeToggle({ mode, onChange }: AdminModeToggleProps) {
+export function AdminModeToggle({
+  mode,
+  onChangeAction,
+}: AdminModeToggleProps) {
+  const t = useTranslations("Admin");
   return (
     <div className="inline-flex items-center gap-2 rounded-md border p-1">
       <Button
@@ -15,27 +20,27 @@ export function AdminModeToggle({ mode, onChange }: AdminModeToggleProps) {
         variant={mode === "event" ? "default" : "ghost"}
         size="sm"
         className="rounded-md"
-        onClick={() => onChange("event")}
+        onClick={() => onChangeAction("event")}
       >
-        Create event
+        {t("toggle.createEvent")}
       </Button>
       <Button
         type="button"
         variant={mode === "race" ? "default" : "ghost"}
         size="sm"
         className="rounded-md"
-        onClick={() => onChange("race")}
+        onClick={() => onChangeAction("race")}
       >
-        Add race
+        {t("toggle.addRace")}
       </Button>
       <Button
         type="button"
         variant={mode === "delete" ? "default" : "ghost"}
         size="sm"
         className="rounded-md"
-        onClick={() => onChange("delete")}
+        onClick={() => onChangeAction("delete")}
       >
-        Delete
+        {t("toggle.delete")}
       </Button>
     </div>
   );
