@@ -1,7 +1,6 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { usePathname } from "next/navigation";
 import { adminLoginAction } from "@/lib/actions/admin";
 import { Button } from "@/lib/components/primitives/button";
 import {
@@ -15,6 +14,7 @@ import {
 } from "@/lib/components/primitives/dialog";
 import { Input } from "@/lib/components/primitives/input";
 import { Label } from "@/lib/components/primitives/label";
+import { Link, usePathname } from "@/lib/i18n/navigation";
 
 type AdminTriggerProps = {
   locale: string;
@@ -37,9 +37,9 @@ export function AdminTrigger({ locale, isAuthenticated }: AdminTriggerProps) {
   if (isAuthenticated) {
     return (
       <Button variant="outline" size="icon" aria-label="Go to admin" asChild>
-        <a href={`/${locale}/admin`}>
+        <Link href="/admin">
           <Plus className="h-4 w-4" />
-        </a>
+        </Link>
       </Button>
     );
   }

@@ -304,11 +304,20 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
                   <Label htmlFor={`race-start-${index}`}>Start time</Label>
                   <Input
                     id={`race-start-${index}`}
-                    name="race_start_time"
+                    name="race_start_time_local"
                     type="datetime-local"
                     value={race.startTime}
                     onChange={(e) =>
                       updateRace(index, { startTime: e.target.value })
+                    }
+                  />
+                  <input
+                    type="hidden"
+                    name="race_start_time"
+                    value={
+                      race.startTime
+                        ? new Date(race.startTime).toISOString()
+                        : ""
                     }
                   />
                 </div>

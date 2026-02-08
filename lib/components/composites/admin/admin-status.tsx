@@ -34,6 +34,15 @@ export function AdminStatus({ status, message }: AdminStatusProps) {
       case "invalid-location":
         toast.error("Latitude/longitude must be valid numbers.");
         break;
+      case "invalid-type":
+        toast.error("Event type is invalid.");
+        break;
+      case "invalid-difficulty":
+        toast.error("Race difficulty is invalid.");
+        break;
+      case "invalid-elevation":
+        toast.error("Elevation gain must be a valid number.");
+        break;
       case "error":
         toast.error(message ? `Insert failed: ${message}` : "Insert failed.");
         break;

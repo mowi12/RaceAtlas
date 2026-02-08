@@ -159,7 +159,7 @@ export function AdminAddRaceForm({
           <Label htmlFor="add-race-start">Start time</Label>
           <Input
             id="add-race-start"
-            name="race_start_time"
+            name="race_start_time_local"
             type="datetime-local"
             value={addRace.startTime}
             onChange={(e) =>
@@ -167,6 +167,13 @@ export function AdminAddRaceForm({
                 ...current,
                 startTime: e.target.value,
               }))
+            }
+          />
+          <input
+            type="hidden"
+            name="race_start_time"
+            value={
+              addRace.startTime ? new Date(addRace.startTime).toISOString() : ""
             }
           />
         </div>

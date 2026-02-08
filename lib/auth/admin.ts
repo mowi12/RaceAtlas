@@ -83,6 +83,9 @@ export async function isAdminAuthenticated(): Promise<boolean> {
   if (!issuedAt || !signature) return false;
 
   const expected = signToken(issuedAt, secret);
+  if (signature.length !== expected.length) {
+    return false;
+  }
   if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) {
     return false;
   }

@@ -4,8 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAdminSession, isAdminAuthenticated } from "@/lib/auth/admin";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
-import type { EventType } from "@/lib/types/event";
-import type { RaceDifficulty } from "@/lib/types/race";
+import { EVENT_TYPES, type EventType } from "@/lib/types/event";
+import { RACE_DIFFICULTIES, type RaceDifficulty } from "@/lib/types/race";
 
 function encodeMessage(message: string) {
   return encodeURIComponent(message);
@@ -58,9 +58,10 @@ export async function adminCreateEventAction(formData: FormData) {
     formData.get("event_description_de") ?? "",
   ).trim();
   const eventDate = String(formData.get("event_date") ?? "").trim();
-  const eventType = String(
-    formData.get("event_type") ?? "",
-  ).trim() as EventType;
+  const eventTypeRaw = String(formData.get("event_type") ?? "").trim();
+  const eventType = EVENT_TYPES.includes(eventTypeRaw as EventType)
+    ? (eventTypeRaw as EventType)
+    : "";
   const eventExternal = String(
     formData.get("event_external_link") ?? "",
   ).trim();
@@ -88,6 +89,10 @@ export async function adminCreateEventAction(formData: FormData) {
   const raceDifficulties = formData
     .getAll("race_difficulty")
     .map((value) => String(value).trim() as RaceDifficulty | "");
+
+  if (!eventType && eventTypeRaw) {
+    redirect(`/${locale}/admin?status=invalid-type`);
+  }
 
   if (
     !eventId ||
@@ -128,14 +133,27 @@ export async function adminCreateEventAction(formData: FormData) {
       redirect(`/${locale}/admin?status=missing-required`);
     }
 
+    const elevation = elevationRaw ? Number(elevationRaw) : null;
+    if (elevationRaw && !Number.isFinite(elevation)) {
+      redirect(`/${locale}/admin?status=invalid-elevation`);
+    }
+
+    const normalizedDifficulty =
+      difficulty && RACE_DIFFICULTIES.includes(difficulty as RaceDifficulty)
+        ? (difficulty as RaceDifficulty)
+        : "";
+    if (difficulty && !normalizedDifficulty) {
+      redirect(`/${locale}/admin?status=invalid-difficulty`);
+    }
+
     races.push({
       id,
       event_id: eventId,
       name: { en: nameEn, de: nameDe },
       distance_meters: distance,
-      elevation_gain_meters: elevationRaw ? Number(elevationRaw) : null,
+      elevation_gain_meters: elevation,
       start_time: startTime || null,
-      difficulty: difficulty || null,
+      difficulty: normalizedDifficulty || null,
     });
   }
 
@@ -205,10 +223,19 @@ export async function adminAddRaceAction(formData: FormData) {
   const raceDistanceRaw = String(formData.get("race_distance") ?? "").trim();
   const raceDistance = Number(raceDistanceRaw);
   const raceElevation = String(formData.get("race_elevation") ?? "").trim();
+  const elevation = raceElevation ? Number(raceElevation) : null;
+  if (raceElevation && !Number.isFinite(elevation)) {
+    redirect(`/${locale}/admin?status=invalid-elevation`);
+  }
   const raceStart = String(formData.get("race_start_time") ?? "").trim();
-  const raceDifficulty = String(formData.get("race_difficulty") ?? "").trim() as
-    | RaceDifficulty
-    | "";
+  const raceDifficultyRaw = String(
+    formData.get("race_difficulty") ?? "",
+  ).trim();
+  const raceDifficulty =
+    raceDifficultyRaw &&
+    RACE_DIFFICULTIES.includes(raceDifficultyRaw as RaceDifficulty)
+      ? (raceDifficultyRaw as RaceDifficulty)
+      : "";
 
   if (
     !eventId ||
@@ -221,13 +248,17 @@ export async function adminAddRaceAction(formData: FormData) {
     redirect(`/${locale}/admin?status=missing-required`);
   }
 
+  if (raceDifficultyRaw && !raceDifficulty) {
+    redirect(`/${locale}/admin?status=invalid-difficulty`);
+  }
+
   const supabase = createSupabaseAdminClient();
   const { error } = await supabase.from("races").upsert({
     id: raceId,
     event_id: eventId,
     name: { en: raceNameEn, de: raceNameDe },
     distance_meters: raceDistance,
-    elevation_gain_meters: raceElevation ? Number(raceElevation) : null,
+    elevation_gain_meters: elevation,
     start_time: raceStart || null,
     difficulty: raceDifficulty || null,
   });
