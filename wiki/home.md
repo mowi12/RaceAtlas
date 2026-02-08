@@ -1,16 +1,11 @@
-<div align="center">
-    <picture>
-        <img alt="RaceAtlas Logo" src="public/images/logo-with-text/raceatlas-logo-with-text-black_2125x500.png" />
-    </picture>
-</div>
+# RaceAtlas Wiki
 
-RaceAtlas is a Next.js app for discovering and visualizing running events across timeline, calendar, and map views.
-Event data is stored in Supabase, with a lightweight admin panel for creating, updating, and deleting events and their
-races.
+Welcome to the RaceAtlas wiki. These pages capture the essentials: how the app is structured, how data is stored in
+Supabase, and how deployments are handled. The wiki is generated from the `/wiki` folder in this repository, so edits
+should be made in the repo and synced automatically.
 
-## Docs
+## Start Here
 
-- [Home](https://github.com/mowi12/RaceAtlas/wiki) - Overview and entry point
 - [Setup](https://github.com/mowi12/RaceAtlas/wiki/Setup) - Local setup and environment variables
 - [Supabase](https://github.com/mowi12/RaceAtlas/wiki/Supabase) - Database schema, migrations, and seeding
 - [Deployment](https://github.com/mowi12/RaceAtlas/wiki/Deployment) - Docker and deploy workflow
