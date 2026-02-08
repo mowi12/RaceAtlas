@@ -14,10 +14,10 @@ import {
 } from "@/lib/components/primitives/select";
 import { Separator } from "@/lib/components/primitives/separator";
 import { Textarea } from "@/lib/components/primitives/textarea";
-import type { EventType } from "@/lib/types/event";
+import { EVENT_TYPES, type EventType } from "@/lib/types/event";
 import { RACE_DIFFICULTIES, type RaceDifficulty } from "@/lib/types/race";
 
-const EVENT_TYPES: EventType[] = ["FunRun", "TrailRun", "RoadRace", "Ultra"];
+const EVENT_TYPES_LIST: EventType[] = [...EVENT_TYPES];
 const DIFFICULTIES: RaceDifficulty[] = [...RACE_DIFFICULTIES];
 
 type AdminEventFormProps = {
@@ -171,7 +171,7 @@ export function AdminEventForm({ locale }: AdminEventFormProps) {
                 <SelectValue placeholder="Select event type" />
               </SelectTrigger>
               <SelectContent>
-                {EVENT_TYPES.map((type) => (
+                {EVENT_TYPES_LIST.map((type) => (
                   <SelectItem key={type} value={type}>
                     {type}
                   </SelectItem>

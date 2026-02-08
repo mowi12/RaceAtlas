@@ -42,13 +42,15 @@ export interface Route {
 /**
  * Enumerates the supported semantic types for route points of interest.
  */
-export type RoutePOIType =
-  | "nutrition"
-  | "toilet"
-  | "medical"
-  | "water"
-  | "checkpoint"
-  | "other";
+export const ROUTE_POI_TYPES = [
+  "nutrition",
+  "toilet",
+  "medical",
+  "water",
+  "checkpoint",
+  "other",
+] as const;
+export type RoutePOIType = (typeof ROUTE_POI_TYPES)[number];
 
 /**
  * Represents a semantically meaningful point near or on a race route.
