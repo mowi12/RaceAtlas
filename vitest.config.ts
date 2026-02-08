@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
-    include: ["tests/**/*.test.ts"],
+    include: ["src/tests/**/*.test.ts"],
     coverage: {
       provider: "v8",
       enabled: true,
@@ -14,7 +14,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@/lib": "./lib",
+      "@/lib": "./src/lib",
     },
   },
 });
