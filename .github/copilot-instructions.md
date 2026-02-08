@@ -113,8 +113,8 @@ pnpm format  # Auto-format with Biome
 **Sequential order:**
 
 1. **Lint Job:**
-   - Runs `npm run lint` (Biome)
-   - Runs `npm run lint:md` (Markdown)
+   - Runs `pnpm run lint` (Biome)
+   - Runs `pnpm run lint:md` (Markdown)
 2. **Test Job:** (runs after lint passes)
    - Runs `pnpm test` with coverage
    - Uploads coverage artifacts
