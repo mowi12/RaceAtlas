@@ -1,6 +1,6 @@
 -- Optional: wipe existing data to avoid duplicates.
 -- Uncomment if you want a full reset before seeding.
-truncate table races, events;
+-- truncate table races, events;
 
 -- Events (upsert by id)
 insert into events (id, name, description, location, date, type, external_link)
