@@ -32,10 +32,10 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       # Only push artifacts on the main branch or on a new tag
       - name: Determine if Artifacts should be pushed to the Registry
@@ -52,7 +52,7 @@ jobs:
       # - latest tags: for main branch and latest tag -> latest
       - name: Extract Metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -65,7 +65,7 @@ jobs:
 
       - name: Login to GitHub Container Registry
         if: steps.check-push.outputs.should-push == 'true'
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -73,7 +73,7 @@ jobs:
 
       - name: Build and Push Docker Image
         id: push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: ${{ steps.check-push.outputs.should-push == 'true' }}
@@ -84,7 +84,7 @@ jobs:
 
       - name: Generate Artifact Attestation
         if: false # TODO: Enable when attestations are available for user-owned private repos.
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.push.outputs.digest }}
