@@ -89,7 +89,7 @@ importers:
         version: 4.2.2
       '@types/node':
         specifier: ^25
-        version: 25.3.0
+        version: 25.5.0
       '@types/react':
         specifier: ^19
         version: 19.2.14
@@ -98,7 +98,7 @@ importers:
         version: 19.2.3(@types/react@19.2.14)
       '@vitest/coverage-v8':
         specifier: 4.0.18
-        version: 4.0.18(vitest@4.0.18(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0))
+        version: 4.0.18(vitest@4.0.18(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0))
       markdownlint-cli:
         specifier: ^0.47.0
         version: 0.47.0
@@ -113,7 +113,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.0.18
-        version: 4.0.18(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)
+        version: 4.0.18(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)
 
 packages:
 
@@ -1743,8 +1743,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@25.3.0':
-    resolution: {integrity: sha512-4K3bqJpXpqfg2XKGK9bpDTc6xO/xoUP/RBWS7AtRMug6zZFaRekiLzjVtAoZMquxoAbzBvy5nxQ7veS5eYzf8A==}
+  '@types/node@25.5.0':
+    resolution: {integrity: sha512-jp2P3tQMSxWugkCUKLRPVUpGaL5MVFwF8RDuSRztfwgN1wmqJeMSbKlnEtQqU8UrhTmzEmZdu2I6v2dpp7XIxw==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -4049,7 +4049,7 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@25.3.0':
+  '@types/node@25.5.0':
     dependencies:
       undici-types: 7.18.2
 
@@ -4065,9 +4065,9 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.5.0
 
-  '@vitest/coverage-v8@4.0.18(vitest@4.0.18(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0))':
+  '@vitest/coverage-v8@4.0.18(vitest@4.0.18(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0))':
     dependencies:
       '@bcoe/v8-coverage': 1.0.2
       '@vitest/utils': 4.0.18
@@ -4079,7 +4079,7 @@ snapshots:
       obug: 2.1.1
       std-env: 3.10.0
       tinyrainbow: 3.0.3
-      vitest: 4.0.18(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)
+      vitest: 4.0.18(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)
 
   '@vitest/expect@4.0.18':
     dependencies:
@@ -4090,13 +4090,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.0.3
 
-  '@vitest/mocker@4.0.18(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0))':
+  '@vitest/mocker@4.0.18(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0))':
     dependencies:
       '@vitest/spy': 4.0.18
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)
+      vite: 7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)
 
   '@vitest/pretty-format@4.0.18':
     dependencies:
@@ -4972,7 +4972,7 @@ snapshots:
     dependencies:
       react: 19.2.4
 
-  vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0):
+  vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0):
     dependencies:
       esbuild: 0.27.2
       fdir: 6.5.0(picomatch@4.0.3)
@@ -4981,15 +4981,15 @@ snapshots:
       rollup: 4.60.0
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.5.0
       fsevents: 2.3.3
       jiti: 2.6.1
       lightningcss: 1.32.0
 
-  vitest@4.0.18(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0):
+  vitest@4.0.18(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0):
     dependencies:
       '@vitest/expect': 4.0.18
-      '@vitest/mocker': 4.0.18(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0))
+      '@vitest/mocker': 4.0.18(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0))
       '@vitest/pretty-format': 4.0.18
       '@vitest/runner': 4.0.18
       '@vitest/snapshot': 4.0.18
@@ -5006,10 +5006,10 @@ snapshots:
       tinyexec: 1.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vite: 7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)
+      vite: 7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 25.3.0
+      '@types/node': 25.5.0
     transitivePeerDependencies:
       - jiti
       - less
