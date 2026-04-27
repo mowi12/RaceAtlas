@@ -69,8 +69,8 @@ importers:
         specifier: 19.2.5
         version: 19.2.5(react@19.2.5)
       simple-icons:
-        specifier: ^16.14.0
-        version: 16.14.0
+        specifier: ^16.18.0
+        version: 16.18.0
       sonner:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -2403,8 +2403,8 @@ packages:
   siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}
 
-  simple-icons@16.14.0:
-    resolution: {integrity: sha512-2Nvs3jJpCfMWQerD4zdv91g/MpnWn81a7uhyAC0reuhrjmS2MtSmwIKwewOJR6Xe97ZmfltDntCDqKJIBawQOw==}
+  simple-icons@16.18.0:
+    resolution: {integrity: sha512-5KbjcP456Gm1lrk+rhDuX4zFri+3lRX39IjzXAvoMAO8Ne76WlVlM+Z3kA6jdZ7+QHadgXsf++R7g2jaYVbYig==}
     engines: {node: '>=0.12.18'}
 
   smol-toml@1.6.1:
@@ -4898,7 +4898,7 @@ snapshots:
 
   siginfo@2.0.0: {}
 
-  simple-icons@16.14.0: {}
+  simple-icons@16.18.0: {}
 
   smol-toml@1.6.1: {}
 
