@@ -1,4 +1,5 @@
 import { Section, VariantRow } from "@/app/design/DesignShowcase";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 
 export function Components() {
@@ -39,6 +40,30 @@ export function Components() {
             <Button variant="destructive" disabled>
               DELETE RACE
             </Button>
+          </VariantRow>
+        </div>
+      </Section>
+
+      <Section id="badges" title="Badges">
+        <div className="flex flex-col gap-8">
+          <VariantRow label="SURFACE">
+            <Badge variant="surface" value="road" />
+            <Badge variant="surface" value="trail" />
+            <Badge variant="surface" value="mixed" />
+          </VariantRow>
+          <VariantRow label="STATUS">
+            <Badge variant="status" value="open" />
+            <Badge variant="status" value="waitlist" />
+            <Badge variant="status" value="full" />
+          </VariantRow>
+          <VariantRow label="DISTANCE">
+            <Badge variant="distance" value="400m" />
+            <Badge variant="distance" value="1K" />
+            <Badge variant="distance" value="5K" />
+            <Badge variant="distance" value="10K" />
+            <Badge variant="distance" value="Half" />
+            <Badge variant="distance" value="Marathon" />
+            <Badge variant="distance" value="Ultra · 50K" />
           </VariantRow>
         </div>
       </Section>
