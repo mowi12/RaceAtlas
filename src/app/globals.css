@@ -6,10 +6,10 @@
   --paper-3: #dcd6c5;
   --ink: #0e1612;
   --ink-soft: #3d4a44;
-  --dim: #61675e; /* was --muted */
+  --dim: #61675e;
   --rule: #cfc8b6;
-  --lime: #c8ff3a; /* was --accent */
-  --lime-ink: #1a2a08; /* was --accent-ink */
+  --lime: #c8ff3a;
+  --lime-ink: #1a2a08;
   --warm: #d96a3f;
 
   --background: var(--paper);
@@ -40,10 +40,10 @@
   --color-paper-3: var(--paper-3);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
-  --color-dim: var(--dim); /* was --color-muted */
+  --color-dim: var(--dim);
   --color-rule: var(--rule);
-  --color-lime: var(--lime); /* was --color-accent */
-  --color-lime-ink: var(--lime-ink); /* was --color-accent-ink */
+  --color-lime: var(--lime);
+  --color-lime-ink: var(--lime-ink);
   --color-warm: var(--warm);
 
   --color-background: var(--background);
