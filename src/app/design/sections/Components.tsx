@@ -1,6 +1,7 @@
 import { Section, VariantRow } from "@/app/design/DesignShowcase";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { CapacityBar } from "@/components/ui/CapacityBar";
 
 export function Components() {
   return (
@@ -64,6 +65,41 @@ export function Components() {
             <Badge variant="distance" value="Half" />
             <Badge variant="distance" value="Marathon" />
             <Badge variant="distance" value="Ultra · 50K" />
+          </VariantRow>
+        </div>
+      </Section>
+
+      <Section id="capacity" title="Capacity Bar">
+        <div className="flex flex-col gap-6 max-w-md">
+          <VariantRow label="UNDER 75% (42%)">
+            <div className="w-full">
+              <CapacityBar taken={6300} cap={15000} />
+            </div>
+          </VariantRow>
+          <VariantRow label="75-90% (86%)">
+            <div className="w-full">
+              <CapacityBar taken={12900} cap={15000} />
+            </div>
+          </VariantRow>
+          <VariantRow label="90%+ (91%)">
+            <div className="w-full">
+              <CapacityBar taken={24570} cap={27000} />
+            </div>
+          </VariantRow>
+          <VariantRow label="FULL · waitlist=false (100%)">
+            <div className="w-full">
+              <CapacityBar taken={50000} cap={50000} />
+            </div>
+          </VariantRow>
+          <VariantRow label="FULL · waitlist=true (100%)">
+            <div className="w-full">
+              <CapacityBar taken={50000} cap={50000} waitlist />
+            </div>
+          </VariantRow>
+          <VariantRow label="91% · waitlist=true (not shown — not actually full)">
+            <div className="w-full">
+              <CapacityBar taken={24570} cap={27000} waitlist />
+            </div>
           </VariantRow>
         </div>
       </Section>
