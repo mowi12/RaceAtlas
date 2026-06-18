@@ -1,6 +1,6 @@
 // Computes WCAG contrast ratios for token pairs defined in src/app/globals.css.
 //
-// Run: npm run check:contrast (or: node scripts/check-contrast.mjs)
+// Run: pnpm check:contrast (or: node scripts/check-contrast.mjs)
 //
 // How it works: reads :root { ... } from globals.css, parses every "--name: value"
 // declaration, and resolves var(--x) references recursively (see resolve() below) so
@@ -13,10 +13,11 @@
 // To check a new pair, add an entry to the `pairs` array below:
 // [label, foregroundTokenName, backgroundTokenName, requiredRatio]
 //
-// Known failures as of the last run: muted-foreground (on background and card) and
-// border (on background). Decided to leave as-is for now — revisit if these are used
-// somewhere the failure actually matters (e.g. muted-foreground as real body text, or
-// border as a meaningful focus/UI boundary rather than a decorative divider).
+// Known failure: border (#cfc8b6) on background, 1.43:1 vs the 3:1 UI threshold.
+// Left as-is — border is used as a decorative divider/track-fill (CapacityBar,
+// RadiusControl, table rows), not a meaningful focus/UI boundary, so WCAG 1.4.11's
+// non-text-contrast rule doesn't actually apply here. Revisit if border is ever used
+// as a real control boundary (e.g. input outline) where the failure would matter.
 import { readFileSync } from "node:fs";
 
 const css = readFileSync(
