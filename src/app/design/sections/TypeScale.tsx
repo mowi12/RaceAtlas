@@ -1,4 +1,4 @@
-import { Section } from "@/app/design/DesignShowcase";
+import { Section } from "@/app/design/showcase/ShowcaseLayout";
 
 const typeScale: {
   name: string;

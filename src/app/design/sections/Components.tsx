@@ -1,7 +1,44 @@
-import { Section, VariantRow } from "@/app/design/DesignShowcase";
+"use client";
+
+import { useState } from "react";
+import { Section, VariantRow } from "@/app/design/showcase/ShowcaseLayout";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CapacityBar } from "@/components/ui/CapacityBar";
+import { FilterChip } from "@/components/ui/FilterChip";
+import { SnapSlider } from "@/components/ui/SnapSlider";
+
+const CHIP_LABELS = ["NEAREST", "SOONEST", "ROAD", "TRAIL", "ULTRA"];
+
+function FilterChipsDemo() {
+  const [active, setActive] = useState<Set<string>>(new Set(["NEAREST"]));
+
+  function toggle(label: string) {
+    setActive((prev) => {
+      const next = new Set(prev);
+      if (next.has(label)) {
+        next.delete(label);
+      } else {
+        next.add(label);
+      }
+      return next;
+    });
+  }
+
+  return (
+    <>
+      {CHIP_LABELS.map((label) => (
+        <FilterChip
+          key={label}
+          active={active.has(label)}
+          onClick={() => toggle(label)}
+        >
+          {label}
+        </FilterChip>
+      ))}
+    </>
+  );
+}
 
 export function Components() {
   return (
@@ -67,6 +104,12 @@ export function Components() {
             <Badge variant="distance" value="Ultra · 50K" />
           </VariantRow>
         </div>
+      </Section>
+
+      <Section id="chips" title="Filter Chips">
+        <VariantRow label="ACTIVE + INACTIVE">
+          <FilterChipsDemo />
+        </VariantRow>
       </Section>
 
       <Section id="capacity" title="Capacity Bar">
