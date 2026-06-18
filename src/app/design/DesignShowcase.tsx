@@ -1,5 +1,6 @@
 import type React from "react";
 import { Colors } from "@/app/design/sections/Colors";
+import { Components } from "@/app/design/sections/Components";
 import { ContrastCheck } from "@/app/design/sections/ConstrastCheck";
 import { TypeScale } from "@/app/design/sections/TypeScale";
 
@@ -57,6 +58,7 @@ export function DesignShowcase() {
         <Colors />
         <ContrastCheck />
         <TypeScale />
+        <Components />
       </div>
     </div>
   );
