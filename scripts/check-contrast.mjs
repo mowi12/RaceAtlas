@@ -2,88 +2,20 @@
 //
 // Run: pnpm check:contrast (or: node scripts/check-contrast.mjs)
 //
-// How it works: reads :root { ... } from globals.css, parses every "--name: value"
-// declaration, and resolves var(--x) references recursively (see resolve() below) so
-// this always reflects whatever's currently in globals.css — no hardcoded color list
-// to drift out of sync. Contrast is computed with the standard WCAG relative-luminance
-// formula (same math as webaim.org's contrast checker). Each pair is checked against
-// 4.5:1 (body text) or 3:1 (large text / UI components like ring, border), printed as
-// pass/fail, and the process exits non-zero if anything fails — usable as a CI gate later.
-//
-// To check a new pair, add an entry to the `pairs` array below:
-// [label, foregroundTokenName, backgroundTokenName, requiredRatio]
+// Shared logic lives in src/lib/contrast.ts (also used by the ContrastCheck
+// design system section), so the token list and math can't drift between the
+// CLI gate and the visual preview.
 //
 // Known failure: border (#cfc8b6) on background, 1.43:1 vs the 3:1 UI threshold.
 // Left as-is — border is used as a decorative divider/track-fill (CapacityBar,
 // RadiusControl, table rows), not a meaningful focus/UI boundary, so WCAG 1.4.11's
 // non-text-contrast rule doesn't actually apply here. Revisit if border is ever used
 // as a real control boundary (e.g. input outline) where the failure would matter.
-import { readFileSync } from "node:fs";
+import { computeContrastResults } from "../src/lib/contrast.ts";
 
-const css = readFileSync(
-  new URL("../src/app/globals.css", import.meta.url),
-  "utf8",
-);
-
-// Pull out the :root { ... } block and parse "--name: value;" declarations.
-// Values are either literal hex (#fff) or var(--other) references, which we resolve recursively below.
-const rootBlock = css.match(/:root\s*{([^}]*)}/s)?.[1] ?? "";
-const raw = new Map();
-for (const line of rootBlock.split(";")) {
-  const match = line.match(/--([\w-]+)\s*:\s*(.+)/s);
-  if (match) raw.set(match[1], match[2].trim());
-}
-
-function resolve(name, seen = new Set()) {
-  if (seen.has(name)) throw new Error(`circular var reference: ${name}`);
-  seen.add(name);
-  const value = raw.get(name);
-  if (!value) throw new Error(`unknown token: --${name}`);
-  const varRef = value.match(/^var\(--([\w-]+)\)$/);
-  return varRef ? resolve(varRef[1], seen) : value;
-}
-
-function hexToRgb(hex) {
-  const n = Number.parseInt(hex.replace("#", ""), 16);
-  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-}
-
-// WCAG relative luminance: https://www.w3.org/TR/WCAG21/#dfn-relative-luminance
-function luminance([r, g, b]) {
-  const [R, G, B] = [r, g, b].map((c) => {
-    const s = c / 255;
-    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
-  });
-  return 0.2126 * R + 0.7152 * G + 0.0722 * B;
-}
-
-function contrastRatio(hexA, hexB) {
-  const lA = luminance(hexToRgb(hexA));
-  const lB = luminance(hexToRgb(hexB));
-  const [lighter, darker] = lA > lB ? [lA, lB] : [lB, lA];
-  return (lighter + 0.05) / (darker + 0.05);
-}
-
-// [label, foreground token, background token, required ratio]
-const pairs = [
-  ["body text", "foreground", "background", 4.5],
-  ["muted text on bg", "muted-foreground", "background", 4.5],
-  ["muted text on card", "muted-foreground", "card", 4.5],
-  ["card text", "card-foreground", "card", 4.5],
-  ["primary button text", "primary-foreground", "primary", 4.5],
-  ["secondary button text", "secondary-foreground", "secondary", 4.5],
-  ["destructive button text", "destructive-foreground", "destructive", 4.5],
-  ["ring on background", "ring", "background", 3],
-  ["ring on card", "ring", "card", 3],
-  ["border on background", "border", "background", 3],
-];
-
+const results = computeContrastResults();
 let allPass = true;
-for (const [label, fg, bg, required] of pairs) {
-  const fgHex = resolve(fg);
-  const bgHex = resolve(bg);
-  const ratio = contrastRatio(fgHex, bgHex);
-  const pass = ratio >= required;
+for (const { label, fg, fgHex, bg, bgHex, ratio, required, pass } of results) {
   allPass &&= pass;
   console.log(
     `${pass ? "✅" : "❌"} ${label.padEnd(26)} ${fg} (${fgHex}) on ${bg} (${bgHex}) — ${ratio.toFixed(2)}:1 (need ${required}:1)`,
