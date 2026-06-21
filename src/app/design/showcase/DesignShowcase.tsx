@@ -1,6 +1,7 @@
 import { Colors } from "@/app/design/sections/Colors";
 import { Components } from "@/app/design/sections/Components";
 import { ContrastCheck } from "@/app/design/sections/ConstrastCheck";
+import { Library } from "@/app/design/sections/Library";
 import { TypeScale } from "@/app/design/sections/TypeScale";
 
 export function DesignShowcase() {
@@ -22,6 +23,7 @@ export function DesignShowcase() {
         <ContrastCheck />
         <TypeScale />
         <Components />
+        <Library />
       </div>
     </div>
   );
