@@ -12,6 +12,12 @@ export type ContrastPair = {
   border?: boolean;
   ring?: boolean;
   required: number;
+  /**
+   * Excluded from the CLI gate: a sub-threshold ratio here is acceptable because
+   * the token is used only decoratively (not as text or a control boundary), so
+   * WCAG's contrast minimums don't apply. Still computed and shown for honesty.
+   */
+  exempt?: boolean;
 };
 
 export type ContrastResult = ContrastPair & {
@@ -56,6 +62,36 @@ export const contrastPairs: ContrastPair[] = [
     required: 4.5,
   },
   {
+    label: "success fill text",
+    fg: "success-foreground",
+    bg: "success",
+    required: 4.5,
+  },
+  {
+    label: "success as text on card",
+    fg: "success",
+    bg: "card",
+    required: 4.5,
+  },
+  {
+    label: "caution fill text",
+    fg: "caution-foreground",
+    bg: "caution",
+    required: 4.5,
+  },
+  {
+    label: "warning fill text",
+    fg: "warning-foreground",
+    bg: "warning",
+    required: 4.5,
+  },
+  {
+    label: "accent fill text",
+    fg: "accent-foreground",
+    bg: "accent",
+    required: 4.5,
+  },
+  {
     label: "ring on background",
     fg: "ring",
     bg: "background",
@@ -64,11 +100,26 @@ export const contrastPairs: ContrastPair[] = [
   },
   { label: "ring on card", fg: "ring", bg: "card", ring: true, required: 3 },
   {
-    label: "border on background",
+    label: "input border on background",
+    fg: "input",
+    bg: "background",
+    border: true,
+    required: 3,
+  },
+  {
+    label: "input border on card",
+    fg: "input",
+    bg: "card",
+    border: true,
+    required: 3,
+  },
+  {
+    label: "border (decorative) on background",
     fg: "border",
     bg: "background",
     border: true,
     required: 3,
+    exempt: true,
   },
 ];
 

@@ -10,6 +10,7 @@ const rawSwatches = [
   { name: "rule", bg: "bg-rule" },
   { name: "lime", bg: "bg-lime" },
   { name: "lime-ink", bg: "bg-lime-ink" },
+  { name: "gold", bg: "bg-gold" },
   { name: "warm", bg: "bg-warm" },
 ];
 
@@ -26,6 +27,9 @@ const semanticPairs: { name: string; bg: string; fg?: string }[] = [
     bg: "bg-destructive",
     fg: "text-destructive-foreground",
   },
+  { name: "success", bg: "bg-success", fg: "text-success-foreground" },
+  { name: "caution", bg: "bg-caution", fg: "text-caution-foreground" },
+  { name: "warning", bg: "bg-warning", fg: "text-warning-foreground" },
   { name: "border", bg: "bg-border" },
   { name: "input", bg: "bg-input" },
   { name: "ring", bg: "bg-ring" },

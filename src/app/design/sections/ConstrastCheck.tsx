@@ -34,10 +34,15 @@ export function ContrastCheck() {
               {item.label}
             </span>
             <span
-              className={`font-mono text-xs ${item.pass ? "text-foreground" : "text-destructive"}`}
+              className={`font-mono text-xs ${
+                item.pass || item.exempt
+                  ? "text-foreground"
+                  : "text-destructive"
+              }`}
             >
-              {item.pass ? "✅" : "❌"} {item.ratio.toFixed(2)}:1 (need{" "}
-              {item.required}:1)
+              {item.pass ? "✅" : item.exempt ? "⚠️" : "❌"}{" "}
+              {item.ratio.toFixed(2)}:1 (need {item.required}:1)
+              {!item.pass && item.exempt ? " · exempt" : ""}
             </span>
           </div>
         ))}
