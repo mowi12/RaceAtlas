@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Section, VariantRow } from "@/app/design/showcase/ShowcaseLayout";
 import { Compass } from "@/components/decorative/Compass";
 import { Contour } from "@/components/decorative/Contour";
+import { RadiusControl } from "@/components/layout/RadiusControl";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CapacityBar } from "@/components/ui/CapacityBar";
@@ -282,6 +283,35 @@ export function Components() {
           <VariantRow label="WAITLIST · full + waitlist">
             <div className="w-full">
               <CapacityBar taken={15000} cap={15000} waitlist />
+            </div>
+          </VariantRow>
+        </div>
+      </Section>
+
+      <Section id="slider" title="Snap Slider">
+        <div className="flex flex-col gap-10 max-w-sm">
+          <VariantRow label="GENERIC · even-spaced stops, custom label + format">
+            <div className="w-full">
+              <SnapSlider
+                label="RESULTS / PAGE"
+                stops={[
+                  { value: 10 },
+                  { value: 20 },
+                  { value: 50 },
+                  { value: 100 },
+                ]}
+                defaultValue={20}
+              />
+            </div>
+          </VariantRow>
+          <VariantRow label="PRESET · RadiusControl (non-linear spacing)">
+            <div className="w-full">
+              <RadiusControl defaultValue={250} />
+            </div>
+          </VariantRow>
+          <VariantRow label="DISABLED">
+            <div className="w-full">
+              <RadiusControl defaultValue={500} disabled />
             </div>
           </VariantRow>
         </div>
