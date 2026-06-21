@@ -79,6 +79,31 @@ export function Components() {
               DELETE RACE
             </Button>
           </VariantRow>
+          <VariantRow label="LOADING">
+            <Button variant="primary" loading>
+              SAVING
+            </Button>
+            <Button variant="secondary" loading>
+              FILTERING
+            </Button>
+            <Button variant="destructive" loading>
+              DELETING
+            </Button>
+          </VariantRow>
+          <VariantRow label="asChild · renders a real <a>">
+            <Button asChild variant="primary">
+              <a href="#buttons">LINK AS BUTTON →</a>
+            </Button>
+            <Button asChild variant="outline">
+              <a
+                href="https://www.w3.org/WAI/ARIA/apg/patterns/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                EXTERNAL ↗
+              </a>
+            </Button>
+          </VariantRow>
         </div>
       </Section>
 
@@ -114,34 +139,34 @@ export function Components() {
 
       <Section id="capacity" title="Capacity Bar">
         <div className="flex flex-col gap-6 max-w-md">
-          <VariantRow label="UNDER 75% (42%)">
+          <VariantRow label="0–50% · black (30%)">
             <div className="w-full">
-              <CapacityBar taken={6300} cap={15000} />
+              <CapacityBar taken={4500} cap={15000} />
             </div>
           </VariantRow>
-          <VariantRow label="75-90% (86%)">
+          <VariantRow label="50–75% · gold (60%)">
             <div className="w-full">
-              <CapacityBar taken={12900} cap={15000} />
+              <CapacityBar taken={9000} cap={15000} />
             </div>
           </VariantRow>
-          <VariantRow label="90%+ (91%)">
+          <VariantRow label="75–90% · orange (80%)">
             <div className="w-full">
-              <CapacityBar taken={24570} cap={27000} />
+              <CapacityBar taken={12000} cap={15000} />
             </div>
           </VariantRow>
-          <VariantRow label="FULL · waitlist=false (100%)">
+          <VariantRow label="90%+ · red (95%)">
             <div className="w-full">
-              <CapacityBar taken={50000} cap={50000} />
+              <CapacityBar taken={14250} cap={15000} />
             </div>
           </VariantRow>
-          <VariantRow label="FULL · waitlist=true (100%)">
+          <VariantRow label="FULL · taken ≥ cap, no waitlist">
             <div className="w-full">
-              <CapacityBar taken={50000} cap={50000} waitlist />
+              <CapacityBar taken={15000} cap={15000} />
             </div>
           </VariantRow>
-          <VariantRow label="91% · waitlist=true (not shown — not actually full)">
+          <VariantRow label="WAITLIST · full + waitlist">
             <div className="w-full">
-              <CapacityBar taken={24570} cap={27000} waitlist />
+              <CapacityBar taken={15000} cap={15000} waitlist />
             </div>
           </VariantRow>
         </div>

@@ -1,4 +1,3 @@
-import type React from "react";
 import { cn } from "@/lib/utils";
 
 export type EventSurface = "road" | "trail" | "mixed";
@@ -24,76 +23,51 @@ interface DistanceBadgeProps {
 
 type BadgeProps = SurfaceBadgeProps | StatusBadgeProps | DistanceBadgeProps;
 
-const surfaceConfig: Record<
-  EventSurface,
-  { label: string; style: React.CSSProperties }
-> = {
-  trail: {
-    label: "TRAIL",
-    style: { background: "var(--warm)", color: "var(--background)" },
-  },
-  road: {
-    label: "ROAD",
-    style: { background: "var(--primary)", color: "var(--primary-foreground)" },
-  },
-  mixed: {
-    label: "MIX",
-    style: {
-      backgroundImage:
-        "repeating-linear-gradient(-45deg, var(--warm) 0 6px, var(--primary) 6px 12px)",
-      color: "var(--background)",
+const surfaceConfig: Record<EventSurface, { label: string; classes: string }> =
+  {
+    trail: { label: "TRAIL", classes: "bg-warning text-warning-foreground" },
+    road: { label: "ROAD", classes: "bg-primary text-primary-foreground" },
+    mixed: {
+      label: "MIX",
+      classes:
+        "text-background bg-[repeating-linear-gradient(-45deg,var(--warning)_0_6px,var(--primary)_6px_12px)]",
     },
-  },
-};
+  };
 
-const statusConfig: Record<
-  EventStatus,
-  { label: string; style: React.CSSProperties }
-> = {
+const statusConfig: Record<EventStatus, { label: string; classes: string }> = {
   open: {
     label: "OPEN",
-    style: {
-      background: "transparent",
-      color: "var(--foreground)",
-      border: "1px solid var(--foreground)",
-    },
+    classes: "bg-transparent text-foreground border border-foreground",
   },
   waitlist: {
     label: "WAITLIST",
-    style: { background: "var(--warm)", color: "var(--background)" },
+    classes: "bg-warning text-warning-foreground",
   },
-  full: {
-    label: "FULL",
-    style: { background: "var(--primary)", color: "var(--primary-foreground)" },
-  },
+  full: { label: "FULL", classes: "bg-primary text-primary-foreground" },
 };
 
-const distanceStyle: React.CSSProperties = {
-  background: "transparent",
-  color: "var(--foreground)",
-  border: "1px solid var(--rule)",
-};
+const distanceClasses = "bg-transparent text-foreground border border-border";
 
 export function Badge({ variant, value, className }: BadgeProps) {
   let label: string;
-  let style: React.CSSProperties;
+  let variantClasses: string;
 
   if (variant === "surface") {
-    ({ label, style } = surfaceConfig[value]);
+    ({ label, classes: variantClasses } = surfaceConfig[value]);
   } else if (variant === "status") {
-    ({ label, style } = statusConfig[value]);
+    ({ label, classes: variantClasses } = statusConfig[value]);
   } else {
     label = value;
-    style = distanceStyle;
+    variantClasses = distanceClasses;
   }
 
   return (
     <span
       className={cn(
-        "inline-block font-mono text-[10px] font-bold tracking-[2px] px-2 py-0.5",
+        "inline-block font-mono text-micro font-bold tracking-[2px] px-2 py-0.5",
+        variantClasses,
         className,
       )}
-      style={style}
     >
       {label}
     </span>

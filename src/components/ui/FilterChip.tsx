@@ -20,7 +20,7 @@ export function FilterChip({
       pressed={active}
       onPressedChange={() => onClick?.()}
       className={cn(
-        "inline-block px-3 py-1.5 font-mono text-[10px] tracking-[1.5px] border whitespace-nowrap transition-colors cursor-pointer",
+        "inline-block px-3 py-1.5 font-mono text-micro tracking-[1.5px] border whitespace-nowrap transition-colors cursor-pointer",
         focusRing,
         active
           ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
