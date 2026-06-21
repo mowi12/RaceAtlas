@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Section, VariantRow } from "@/app/design/showcase/ShowcaseLayout";
+import { Compass } from "@/components/brand/Compass";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CapacityBar } from "@/components/ui/CapacityBar";
@@ -43,6 +44,19 @@ function FilterChipsDemo() {
 export function Components() {
   return (
     <div>
+      <Section id="brand" title="Brand">
+        <div className="flex flex-col gap-12">
+          <VariantRow label="COMPASS ROSE · SIZE SCALE">
+            <Compass size={40} />
+            <Compass size={68} />
+            <Compass size={100} />
+          </VariantRow>
+          <VariantRow label="COMPASS ROSE · RESPONSIVE (40 → 68px)">
+            <Compass className="size-10 md:size-[68px]" />
+          </VariantRow>
+        </div>
+      </Section>
+
       <Section id="buttons" title="Buttons">
         <div className="flex flex-col gap-8">
           <VariantRow label="VARIANTS · size=md">
