@@ -52,7 +52,7 @@ export function Colors() {
   return (
     <div>
       <Section id="colors" title="Raw palette">
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
           {rawSwatches.map((swatch) => (
             <Swatch key={swatch.name} {...swatch} />
           ))}
@@ -60,7 +60,7 @@ export function Colors() {
       </Section>
 
       <Section id="semantic-tokens" title="Semantic tokens">
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
           {semanticPairs.map((pair) => (
             <Swatch key={pair.name} {...pair} />
           ))}

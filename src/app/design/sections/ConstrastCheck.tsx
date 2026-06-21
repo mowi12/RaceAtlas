@@ -6,7 +6,7 @@ export function ContrastCheck() {
 
   return (
     <Section id="contrast" title="Contrast check">
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {results.map((item) => (
           <div key={item.label} className="flex flex-col gap-2">
             <div
