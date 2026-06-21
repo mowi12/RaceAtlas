@@ -1,5 +1,5 @@
 import type React from "react";
-import { cn } from "@/lib/utils";
+import { cn, focusRing } from "@/lib/utils";
 
 type ButtonVariant =
   | "primary"
@@ -22,7 +22,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   ghost:
     "bg-paper-2 text-foreground border-transparent hover:bg-paper-3 hover:border-foreground",
   destructive:
-    "bg-destructive text-destructive-foreground border-transparent hover:opacity-90",
+    "bg-destructive text-destructive-foreground border-transparent hover:opacity-90 focus-visible:ring-destructive",
   outline: "bg-transparent text-foreground border-rule hover:border-foreground",
 };
 
@@ -43,6 +43,7 @@ export function Button({
     <button
       className={cn(
         "inline-flex items-center justify-center border font-body font-semibold transition-opacity cursor-pointer disabled:cursor-not-allowed disabled:opacity-40",
+        focusRing,
         variantClasses[variant],
         sizeClasses[size],
         className,
