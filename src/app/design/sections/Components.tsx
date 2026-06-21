@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Section, VariantRow } from "@/app/design/showcase/ShowcaseLayout";
-import { Compass } from "@/components/brand/Compass";
+import { Compass } from "@/components/decorative/Compass";
+import { Contour } from "@/components/decorative/Contour";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CapacityBar } from "@/components/ui/CapacityBar";
@@ -44,8 +45,8 @@ function FilterChipsDemo() {
 export function Components() {
   return (
     <div>
-      <Section id="brand" title="Brand">
-        <div className="flex flex-col gap-12">
+      <Section id="decorative" title="Decorative · Contour & Compass">
+        <div className="flex flex-col gap-6">
           <VariantRow label="COMPASS ROSE · SIZE SCALE">
             <Compass size={40} />
             <Compass size={68} />
@@ -53,6 +54,106 @@ export function Components() {
           </VariantRow>
           <VariantRow label="COMPASS ROSE · RESPONSIVE (40 → 68px)">
             <Compass className="size-10 md:size-[68px]" />
+          </VariantRow>
+          <VariantRow label="DENSITY · light">
+            <div className="w-full h-30 overflow-hidden border border-border">
+              <Contour
+                w={900}
+                h={120}
+                density="light"
+                seed={1}
+                className="w-full h-full"
+              />
+            </div>
+          </VariantRow>
+          <VariantRow label="DENSITY · medium">
+            <div className="w-full h-30 overflow-hidden border border-border">
+              <Contour
+                w={900}
+                h={120}
+                density="medium"
+                seed={1}
+                className="w-full h-full"
+              />
+            </div>
+          </VariantRow>
+          <VariantRow label="DENSITY · dense">
+            <div className="w-full h-30 overflow-hidden border border-border">
+              <Contour
+                w={900}
+                h={120}
+                density="dense"
+                seed={7}
+                opacity={0.3}
+                className="w-full h-full"
+              />
+            </div>
+          </VariantRow>
+          <VariantRow label="FADE · fadeStart=0.5 (default · from middle)">
+            <div className="w-full h-30 overflow-hidden border border-border">
+              <Contour
+                w={900}
+                h={120}
+                density="dense"
+                seed={7}
+                opacity={0.3}
+                fade
+                className="w-full h-full"
+              />
+            </div>
+          </VariantRow>
+          <VariantRow label="FADE · fadeStart=1 (whole diagonal)">
+            <div className="w-full h-30 overflow-hidden border border-border">
+              <Contour
+                w={900}
+                h={120}
+                density="dense"
+                seed={7}
+                opacity={0.3}
+                fade
+                fadeStart={1}
+                className="w-full h-full"
+              />
+            </div>
+          </VariantRow>
+          <VariantRow label="COLOR · yellow">
+            <div className="w-full h-30 overflow-hidden border border-border">
+              <Contour
+                w={900}
+                h={120}
+                density="dense"
+                color="yellow"
+                seed={3}
+                opacity={0.45}
+                className="w-full h-full"
+              />
+            </div>
+          </VariantRow>
+          <VariantRow label="COLOR · orange">
+            <div className="w-full h-30 overflow-hidden border border-border">
+              <Contour
+                w={900}
+                h={120}
+                density="dense"
+                color="orange"
+                seed={11}
+                opacity={0.45}
+                className="w-full h-full"
+              />
+            </div>
+          </VariantRow>
+          <VariantRow label="COLOR · red">
+            <div className="w-full h-30 overflow-hidden border border-border">
+              <Contour
+                w={900}
+                h={120}
+                density="dense"
+                color="red"
+                seed={5}
+                opacity={0.4}
+                className="w-full h-full"
+              />
+            </div>
           </VariantRow>
         </div>
       </Section>
