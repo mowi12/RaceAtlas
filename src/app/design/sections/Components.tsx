@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Section, VariantRow } from "@/app/design/showcase/ShowcaseLayout";
+import { Logo } from "@/components/brand/Logo";
 import { Compass } from "@/components/decorative/Compass";
 import { Contour } from "@/components/decorative/Contour";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -48,6 +49,16 @@ function FilterChipsDemo() {
 export function Components() {
   return (
     <div>
+      <Section id="brand" title="Brand">
+        <div className="flex flex-col gap-12">
+          <VariantRow label="LOGO · SIZE SCALE">
+            <Logo size={28} />
+            <Logo size={48} />
+            <Logo size={72} />
+          </VariantRow>
+        </div>
+      </Section>
+
       <Section id="decorative" title="Decorative · Contour & Compass">
         <div className="flex flex-col gap-6">
           <VariantRow label="COMPASS ROSE · SIZE SCALE">

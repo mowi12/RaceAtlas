@@ -1,6 +1,6 @@
 import { MapPinOff } from "lucide-react";
 import Link from "next/link";
-import { BrandMark } from "@/components/brand/BrandMark";
+import { Logo } from "@/components/brand/Logo";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS, type NavKey } from "./nav-items";
 
@@ -32,7 +32,7 @@ export function TopBar({
         href="/"
         className="flex items-center gap-3 px-4 lg:px-8 text-foreground"
       >
-        <BrandMark size={28} />
+        <Logo size={28} />
         <div>
           <div
             className="font-display font-black text-[24px] leading-none tracking-tight text-foreground"
