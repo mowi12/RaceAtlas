@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import type React from "react";
 import { BreakpointIndicator } from "@/components/dev/BreakpointIndicator";
+import { NavShell } from "@/components/layout/NavShell";
 import {
   archivoNarrow,
   fraunces,
@@ -30,7 +31,7 @@ export default function RootLayout({
       ].join(" ")}
     >
       <body className="min-h-full flex flex-col">
-        {children}
+        <NavShell>{children}</NavShell>
 
         <BreakpointIndicator />
       </body>

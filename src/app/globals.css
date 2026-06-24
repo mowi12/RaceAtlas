@@ -84,6 +84,17 @@
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) * 1.5);
 
+  --animate-blink: blink 1.4s ease-in-out infinite;
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
   --font-display: var(--font-archivo);
   --font-serif: var(--font-fraunces);
   --font-body: var(--font-inter-tight);

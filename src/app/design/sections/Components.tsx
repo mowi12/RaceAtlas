@@ -4,7 +4,9 @@ import { useState } from "react";
 import { Section, VariantRow } from "@/app/design/showcase/ShowcaseLayout";
 import { Compass } from "@/components/decorative/Compass";
 import { Contour } from "@/components/decorative/Contour";
+import { MobileNav } from "@/components/layout/MobileNav";
 import { RadiusControl } from "@/components/layout/RadiusControl";
+import { TopBar } from "@/components/layout/TopBar";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CapacityBar } from "@/components/ui/CapacityBar";
@@ -283,6 +285,36 @@ export function Components() {
           <VariantRow label="WAITLIST · full + waitlist">
             <div className="w-full">
               <CapacityBar taken={15000} cap={15000} waitlist />
+            </div>
+          </VariantRow>
+        </div>
+      </Section>
+
+      <Section id="topbar" title="Top Bar">
+        <div className="flex flex-col gap-4 border border-border overflow-x-auto">
+          <TopBar active="TIMELINE" live city="BERLIN" />
+          <TopBar active="CALENDAR" live city="NEU-ULM" />
+          <TopBar active="MAP" live city="HAMBURG" />
+          {/* location off / denied — struck-through pin */}
+          <TopBar active="EVENTS" />
+        </div>
+      </Section>
+
+      <Section id="mobile-nav" title="Mobile Nav">
+        <div className="flex flex-col gap-4 max-w-xs">
+          <VariantRow label="TIMELINE ACTIVE">
+            <div className="w-full">
+              <MobileNav active="TIMELINE" />
+            </div>
+          </VariantRow>
+          <VariantRow label="MAP ACTIVE">
+            <div className="w-full">
+              <MobileNav active="MAP" />
+            </div>
+          </VariantRow>
+          <VariantRow label="EVENTS ACTIVE">
+            <div className="w-full">
+              <MobileNav active="EVENTS" />
             </div>
           </VariantRow>
         </div>
