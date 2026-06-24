@@ -10,7 +10,10 @@ export function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="border-t border-border pt-12 pb-16">
+    <section
+      id={id}
+      className="border-t border-border pt-12 pb-16 first:border-t-0"
+    >
       <h2 className="font-mono text-[10px] tracking-[4px] text-muted-foreground mb-8 uppercase">
         {title}
       </h2>
