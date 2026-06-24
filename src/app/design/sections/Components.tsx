@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Section, VariantRow } from "@/app/design/showcase/ShowcaseLayout";
 import { Logo } from "@/components/brand/Logo";
+import { Wordmark } from "@/components/brand/Wordmark";
 import { Compass } from "@/components/decorative/Compass";
 import { Contour } from "@/components/decorative/Contour";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -51,6 +52,14 @@ export function Components() {
     <div>
       <Section id="brand" title="Brand">
         <div className="flex flex-col gap-12">
+          <VariantRow label="WORDMARK · FULL">
+            <div className="w-full overflow-x-auto">
+              <Wordmark size={0.8} />
+            </div>
+          </VariantRow>
+          <VariantRow label="WORDMARK · SMALL">
+            <Wordmark size={0.4} />
+          </VariantRow>
           <VariantRow label="LOGO · SIZE SCALE">
             <Logo size={28} />
             <Logo size={48} />

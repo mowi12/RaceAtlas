@@ -1,6 +1,7 @@
 import { MapPinOff } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
+import { Wordmark } from "@/components/brand/Wordmark";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS, type NavKey } from "./nav-items";
 
@@ -33,17 +34,12 @@ export function TopBar({
         className="flex items-center gap-3 px-4 lg:px-8 text-foreground"
       >
         <Logo size={28} />
-        <div>
-          <div
-            className="font-display font-black text-[24px] leading-none tracking-tight text-foreground"
-            style={{ letterSpacing: "-0.02em" }}
-          >
-            RaceAtlas
-          </div>
-          <div className="font-mono text-[9px] tracking-[2px] text-muted-foreground mt-0.5">
-            EST. MMXXVI · GERMANY EDITION
-          </div>
-        </div>
+        <Wordmark
+          size={0.19}
+          subtitle="AN INDEX OF ROAD & TRAIL"
+          subtitleSize={48}
+          underline={false}
+        />
       </Link>
 
       {/* desktop nav */}
