@@ -34,12 +34,17 @@ export function TopBar({
         className="flex items-center gap-3 px-4 lg:px-8 text-foreground"
       >
         <Logo size={28} />
-        <Wordmark
-          size={0.19}
-          subtitle="AN INDEX OF ROAD & TRAIL"
-          subtitleSize={48}
-          underline={false}
-        />
+        <span className="sm:hidden">
+          <Wordmark size={0.19} subtitle={null} underline={false} />
+        </span>
+        <span className="hidden sm:block">
+          <Wordmark
+            size={0.19}
+            subtitle="AN INDEX OF ROAD & TRAIL"
+            subtitleSize={48}
+            underline={false}
+          />
+        </span>
       </Link>
 
       {/* desktop nav */}

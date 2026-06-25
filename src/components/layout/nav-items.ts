@@ -5,6 +5,7 @@ export interface NavItem {
   href: string;
   label: string;
   mobileLabel: string;
+  notFoundText?: string;
 }
 
 const APP_NAV_ITEMS: NavItem[] = [
@@ -13,10 +14,29 @@ const APP_NAV_ITEMS: NavItem[] = [
     href: "/timeline",
     label: "TIMELINE",
     mobileLabel: "TIMELINE",
+    notFoundText: "The 2026 season, laid end to end.",
   },
-  { key: "CALENDAR", href: "/calendar", label: "CALENDAR", mobileLabel: "CAL" },
-  { key: "MAP", href: "/map", label: "MAP", mobileLabel: "MAP" },
-  { key: "EVENTS", href: "/events", label: "EVENTS", mobileLabel: "EVENTS" },
+  {
+    key: "CALENDAR",
+    href: "/calendar",
+    label: "CALENDAR",
+    mobileLabel: "CAL",
+    notFoundText: "Browse race weekends by month.",
+  },
+  {
+    key: "MAP",
+    href: "/map",
+    label: "MAP",
+    mobileLabel: "MAP",
+    notFoundText: "Plot races within reach of you.",
+  },
+  {
+    key: "EVENTS",
+    href: "/events",
+    label: "EVENTS",
+    mobileLabel: "EVENTS",
+    notFoundText: "The full index, A → Z.",
+  },
 ];
 
 // /design 404s in production (see app/design/page.tsx), so only list it in dev.
