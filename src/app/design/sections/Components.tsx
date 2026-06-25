@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/Button";
 import { CapacityBar } from "@/components/ui/CapacityBar";
 import { FilterChip } from "@/components/ui/FilterChip";
 import { SnapSlider } from "@/components/ui/SnapSlider";
+import { UrlDisplay } from "@/components/ui/UrlDisplay";
 
 const CHIP_LABELS = ["NEAREST", "SOONEST", "ROAD", "TRAIL", "ULTRA"];
 
@@ -273,6 +274,26 @@ export function Components() {
         <VariantRow label="ACTIVE + INACTIVE">
           <FilterChipsDemo />
         </VariantRow>
+      </Section>
+
+      <Section id="url-display" title="URL Display">
+        <div className="flex max-w-md flex-col gap-6">
+          <VariantRow label="NESTED PATH">
+            <UrlDisplay
+              host="raceatlas.moritzwieland.de"
+              path="/events/berlin-marathon-2024/results"
+            />
+          </VariantRow>
+          <VariantRow label="SINGLE SEGMENT">
+            <UrlDisplay
+              host="raceatlas.moritzwieland.de"
+              path="/totally-bogus"
+            />
+          </VariantRow>
+          <VariantRow label="ROOT">
+            <UrlDisplay host="localhost:3000" path="/" />
+          </VariantRow>
+        </div>
       </Section>
 
       <Section id="capacity" title="Capacity Bar">

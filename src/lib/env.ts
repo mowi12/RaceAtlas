@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const envSchema = z.object({
-  /* Empty for now, will be filled in later */
+  SITE_DOMAIN: z.string().min(1).default("raceatlas.moritzwieland.de"),
 });
 
 export const env = envSchema.parse(process.env);
