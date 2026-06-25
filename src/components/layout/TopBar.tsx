@@ -31,7 +31,7 @@ export function TopBar({
       {/* brand */}
       <Link
         href="/"
-        className="flex items-center gap-3 px-4 lg:px-8 text-foreground"
+        className="flex items-center gap-2.5 px-3 sm:gap-3 sm:px-4 lg:px-8 text-foreground"
       >
         <Logo size={28} />
         <span className="sm:hidden">
@@ -75,9 +75,7 @@ export function TopBar({
       <div className="flex-1 lg:hidden" />
 
       {/* meta */}
-      <div className="flex items-center gap-3.5 px-4 lg:px-8 font-mono text-[10px] text-muted-foreground tracking-[1.5px]">
-        {/* reserved slot for a future search control (no behavior yet) */}
-        <span className="size-7 shrink-0" aria-hidden="true" />
+      <div className="flex items-center gap-2.5 px-3 sm:gap-3.5 sm:px-4 lg:px-8 font-mono text-[10px] text-muted-foreground tracking-[1.5px]">
         <span>{date}</span>
         <span
           className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-primary text-primary-foreground tracking-[1.5px]"
