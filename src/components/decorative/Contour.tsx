@@ -5,6 +5,8 @@ interface ContourProps {
   w?: number;
   h?: number;
   density?: ContourDensity;
+  /** Overrides the line count derived from `density` when set. */
+  lines?: number;
   color?: ContourColor;
   seed?: number;
   opacity?: number;
@@ -39,6 +41,7 @@ export function Contour({
   w = 800,
   h = 400,
   density = "medium",
+  lines: linesProp,
   color = "black",
   seed = 1,
   opacity = 0.18,
@@ -46,7 +49,7 @@ export function Contour({
   fadeStart = 0.5,
   className,
 }: ContourProps) {
-  const lines = DENSITY_LINES[density];
+  const lines = linesProp ?? DENSITY_LINES[density];
   const stroke = COLOR_TOKENS[color];
   const paths: { d: string; key: number }[] = [];
   for (let i = 0; i < lines; i++) {
