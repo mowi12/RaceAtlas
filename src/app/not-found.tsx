@@ -4,6 +4,7 @@ import { Contour } from "@/components/decorative/Contour";
 import { NAV_ITEMS } from "@/components/layout/nav-items";
 import { RequestedHostUrl } from "@/components/system/RequestedHostUrl";
 import { Button } from "@/components/ui/Button";
+import { IndexRow } from "@/components/ui/IndexRow";
 
 export default function NotFound() {
   return (
@@ -74,21 +75,13 @@ export default function NotFound() {
             WAYS BACK IN
           </div>
           {NAV_ITEMS.filter((item) => item.notFoundText).map((item, i) => (
-            <Link
+            <IndexRow
               key={item.key}
               href={item.href}
-              className={`flex items-baseline gap-3.5 py-3.5 ${
-                i > 0 ? "border-t border-dotted border-border" : ""
-              }`}
-            >
-              <span className="w-[110px] font-display text-[22px] font-black">
-                {item.label}
-              </span>
-              <span className="flex-1 text-sm text-ink-soft">
-                {item.notFoundText}
-              </span>
-              <span className="font-mono text-sm">→</span>
-            </Link>
+              divider={i > 0}
+              title={item.label}
+              body={item.notFoundText}
+            />
           ))}
         </div>
       </aside>
