@@ -65,10 +65,9 @@ export function Wordmark({
       style={{
         width: w,
         height: h,
-        display: "block",
         color: "var(--foreground)",
       }}
-      className={className}
+      className={`block${className ? ` ${className}` : ""}`}
       aria-label="RaceAtlas"
     >
       <g transform="translate(0,20)">

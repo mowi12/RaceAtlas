@@ -14,20 +14,25 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "d3-geo": "^3.1.1",
     "lucide-react": "^1.21.0",
     "next": "16.2.9",
     "radix-ui": "^1.6.0",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "tailwind-merge": "^3.6.0",
+    "topojson-client": "^3.1.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.0",
     "@tailwindcss/postcss": "^4.3.1",
+    "@types/d3-geo": "^3.1.0",
     "@types/node": "^25.9.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@types/topojson-client": "^3.1.5",
+    "@types/topojson-specification": "^1.0.5",
     "babel-plugin-react-compiler": "1.0.0",
     "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3"

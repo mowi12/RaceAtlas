@@ -15,6 +15,12 @@ export const metadata: Metadata = {
   description: "RaceAtlas",
 };
 
+// Mirrors the proxy switch: with maintenance on, the only route that ever
+// renders is /maintenance, and it must do so without the nav chrome.
+const MAINTENANCE_MODE = ["true", "1"].includes(
+  (process.env.MAINTENANCE_MODE ?? "").toLowerCase(),
+);
+
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -41,9 +47,14 @@ export default async function RootLayout({
       ].join(" ")}
     >
       <body className="min-h-full flex flex-col">
-        <NavShell>{children}</NavShell>
-
-        <BreakpointIndicator />
+        {MAINTENANCE_MODE ? (
+          children
+        ) : (
+          <>
+            <NavShell>{children}</NavShell>
+            <BreakpointIndicator />
+          </>
+        )}
       </body>
     </html>
   );
