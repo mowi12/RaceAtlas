@@ -15,9 +15,19 @@ export const metadata: Metadata = {
   description: "RaceAtlas",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // Dev-only: throwing here (vs. in a page) is the only way to exercise
+  // global-error.tsx, which catches root-layout failures. The whole block is
+  // dead code in production, so the layout stays statically rendered there.
+  if (process.env.NODE_ENV !== "production") {
+    const { headers } = await import("next/headers");
+    if ((await headers()).get("x-pathname") === "/boom-global") {
+      throw new Error("Simulated root-layout failure (boom-global route).");
+    }
+  }
+
   return (
     <html
       lang="de"
