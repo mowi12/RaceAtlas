@@ -10,6 +10,7 @@ import { MobileNav } from "@/components/layout/MobileNav";
 import { RadiusControl } from "@/components/layout/RadiusControl";
 import { TopBar } from "@/components/layout/TopBar";
 import { Badge } from "@/components/ui/Badge";
+import { BreadcrumbBar } from "@/components/ui/BreadcrumbBar";
 import { Button } from "@/components/ui/Button";
 import { CapacityBar } from "@/components/ui/CapacityBar";
 import { FilterChip } from "@/components/ui/FilterChip";
@@ -327,6 +328,23 @@ export function Components() {
             <div className="w-full">
               <CapacityBar taken={15000} cap={15000} waitlist />
             </div>
+          </VariantRow>
+        </div>
+      </Section>
+
+      <Section id="breadcrumb" title="Breadcrumb Bar">
+        <div className="flex flex-col gap-4">
+          <VariantRow label="DEFAULT · last item highlighted">
+            <BreadcrumbBar items={["ATLAS", "TRAIL", "ULTRA", "DE-KN-100"]} />
+          </VariantRow>
+          <VariantRow label="HIGHLIGHT · error">
+            <BreadcrumbBar items={["ATLAS", "ERROR"]} highlight="error" />
+          </VariantRow>
+          <VariantRow label="HIGHLIGHT · warning">
+            <BreadcrumbBar items={["ATLAS", "WARNING"]} highlight="warning" />
+          </VariantRow>
+          <VariantRow label="DYNAMIC · derived from pathname (no items)">
+            <BreadcrumbBar />
           </VariantRow>
         </div>
       </Section>
