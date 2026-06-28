@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 export type EventSurface = "road" | "trail" | "mixed";
-export type EventStatus = "open" | "waitlist" | "full";
+export type CapacityState = "open" | "waitlist" | "full";
 
 interface SurfaceBadgeProps {
   variant: "surface";
@@ -9,9 +9,9 @@ interface SurfaceBadgeProps {
   className?: string;
 }
 
-interface StatusBadgeProps {
-  variant: "status";
-  value: EventStatus;
+interface CapacityBadgeProps {
+  variant: "capacity";
+  value: CapacityState;
   className?: string;
 }
 
@@ -21,7 +21,7 @@ interface DistanceBadgeProps {
   className?: string;
 }
 
-type BadgeProps = SurfaceBadgeProps | StatusBadgeProps | DistanceBadgeProps;
+type BadgeProps = SurfaceBadgeProps | CapacityBadgeProps | DistanceBadgeProps;
 
 const surfaceConfig: Record<EventSurface, { label: string; classes: string }> =
   {
@@ -34,7 +34,10 @@ const surfaceConfig: Record<EventSurface, { label: string; classes: string }> =
     },
   };
 
-const statusConfig: Record<EventStatus, { label: string; classes: string }> = {
+const capacityConfig: Record<
+  CapacityState,
+  { label: string; classes: string }
+> = {
   open: {
     label: "OPEN",
     classes: "bg-transparent text-foreground border border-foreground",
@@ -54,8 +57,8 @@ export function Badge({ variant, value, className }: BadgeProps) {
 
   if (variant === "surface") {
     ({ label, classes: variantClasses } = surfaceConfig[value]);
-  } else if (variant === "status") {
-    ({ label, classes: variantClasses } = statusConfig[value]);
+  } else if (variant === "capacity") {
+    ({ label, classes: variantClasses } = capacityConfig[value]);
   } else {
     label = value;
     variantClasses = distanceClasses;

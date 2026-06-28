@@ -16,6 +16,8 @@ import { CapacityBar } from "@/components/ui/CapacityBar";
 import { FilterChip } from "@/components/ui/FilterChip";
 import { SnapSlider } from "@/components/ui/SnapSlider";
 import { UrlDisplay } from "@/components/ui/UrlDisplay";
+import { toBadgeSurface, toCapacityState } from "@/lib/badge";
+import { Surface } from "@/types";
 
 const CHIP_LABELS = ["NEAREST", "SOONEST", "ROAD", "TRAIL", "ULTRA"];
 
@@ -250,14 +252,23 @@ export function Components() {
       <Section id="badges" title="Badges">
         <div className="flex flex-col gap-8">
           <VariantRow label="SURFACE">
-            <Badge variant="surface" value="road" />
-            <Badge variant="surface" value="trail" />
-            <Badge variant="surface" value="mixed" />
+            <Badge variant="surface" value={toBadgeSurface(Surface.ROAD)} />
+            <Badge variant="surface" value={toBadgeSurface(Surface.TRAIL)} />
+            <Badge variant="surface" value={toBadgeSurface(Surface.MIXED)} />
           </VariantRow>
-          <VariantRow label="STATUS">
-            <Badge variant="status" value="open" />
-            <Badge variant="status" value="waitlist" />
-            <Badge variant="status" value="full" />
+          <VariantRow label="CAPACITY">
+            <Badge
+              variant="capacity"
+              value={toCapacityState({ cap: 100, taken: 40, waitlist: false })}
+            />
+            <Badge
+              variant="capacity"
+              value={toCapacityState({ cap: 100, taken: 100, waitlist: true })}
+            />
+            <Badge
+              variant="capacity"
+              value={toCapacityState({ cap: 100, taken: 100, waitlist: false })}
+            />
           </VariantRow>
           <VariantRow label="DISTANCE">
             <Badge variant="distance" value="400m" />
