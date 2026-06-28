@@ -1,12 +1,27 @@
-import type { CapacityState, EventSurface } from "@/components/ui/Badge";
+import type {
+  BadgeDifficulty,
+  CapacityState,
+  EventSurface,
+} from "@/components/ui/Badge";
 import type { RaceCapacity } from "@/types";
-import { Surface } from "@/types";
+import { RaceDifficulty, Surface } from "@/types";
 
 const SURFACE_TO_BADGE: Record<Surface, EventSurface> = {
   [Surface.ROAD]: "road",
   [Surface.TRAIL]: "trail",
   [Surface.MIXED]: "mixed",
 };
+
+const DIFFICULTY_TO_BADGE: Record<RaceDifficulty, BadgeDifficulty> = {
+  [RaceDifficulty.EASY]: "Easy",
+  [RaceDifficulty.MEDIUM]: "Medium",
+  [RaceDifficulty.HARD]: "Hard",
+  [RaceDifficulty.EXTREME]: "Extreme",
+};
+
+/** Maps the domain difficulty enum to the Badge's presentational variant. */
+export const toBadgeDifficulty = (d: RaceDifficulty): BadgeDifficulty =>
+  DIFFICULTY_TO_BADGE[d];
 
 /**
  * Converts a given surface into its corresponding badge surface representation.

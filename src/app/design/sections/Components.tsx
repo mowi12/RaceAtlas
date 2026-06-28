@@ -271,13 +271,19 @@ export function Components() {
             />
           </VariantRow>
           <VariantRow label="DISTANCE">
-            <Badge variant="distance" value="400m" />
-            <Badge variant="distance" value="1K" />
-            <Badge variant="distance" value="5K" />
-            <Badge variant="distance" value="10K" />
-            <Badge variant="distance" value="Half" />
-            <Badge variant="distance" value="Marathon" />
-            <Badge variant="distance" value="Ultra · 50K" />
+            <Badge variant="distance" value={400} />
+            <Badge variant="distance" value={1000} />
+            <Badge variant="distance" value={5000} />
+            <Badge variant="distance" value={10000} />
+            <Badge variant="distance" value={21097} />
+            <Badge variant="distance" value={42195} />
+            <Badge variant="distance" value={50000} />
+          </VariantRow>
+          <VariantRow label="DIFFICULTY">
+            <Badge variant="difficulty" value="Easy" />
+            <Badge variant="difficulty" value="Medium" />
+            <Badge variant="difficulty" value="Hard" />
+            <Badge variant="difficulty" value="Extreme" />
           </VariantRow>
         </div>
       </Section>
