@@ -6,3 +6,137 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum RaceDifficulty {
+  EASY
+  MEDIUM
+  HARD
+  EXTREME
+}
+
+enum Surface {
+  ROAD
+  TRAIL
+  MIXED
+}
+
+enum PoiType {
+  NUTRITION
+  WATER
+  TOILET
+  MEDICAL
+  CHECKPOINT
+  OTHER
+}
+
+model Event {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  name        String
+  /// YYYY-MM-DD, plain calendar date — no timezone.
+  date        DateTime    @db.Date
+  /// IANA time zone of the event location, e.g. "Europe/Berlin".
+  /// Combine with a race's startTime to derive the absolute start instant.
+  timeZone    String
+  description String?
+  status      EventStatus @default(DRAFT)
+
+  // EventLocation
+  locationLat         Float
+  locationLng         Float
+  locationDisplayName String
+
+  links EventLink[]
+  races Race[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EventLink {
+  id      String @id @default(cuid())
+  label   String
+  url     String
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId String
+
+  @@index([eventId])
+}
+
+model Race {
+  id      String @id @default(cuid())
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId String
+
+  /// Advertised race name, e.g. "Marathon Trail" — not a derived label.
+  name                String
+  /// Source of truth — never overwritten by GPX-derived values.
+  distanceMeters      Float
+  elevationGainMeters Float?
+  difficulty          RaceDifficulty?
+  /// Event-local time, HH:mm.
+  startTime           String?
+  surface             Surface?
+
+  // RaceCapacity
+  capacityCap      Int?
+  capacityTaken    Int?
+  capacityWaitlist Boolean?
+
+  route Route?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([eventId])
+}
+
+model Route {
+  id     String @id @default(cuid())
+  race   Race   @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  raceId String @unique
+
+  // start GeoPoint
+  startLat  Float
+  startLng  Float
+  // finish GeoPoint
+  finishLat Float
+  finishLng Float
+
+  pointsOfInterest RoutePOI[]
+  geometry         RouteGeometry?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RoutePOI {
+  id      String @id @default(cuid())
+  route   Route  @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  routeId String
+
+  // location GeoPoint
+  lat         Float
+  lng         Float
+  type        PoiType
+  name        String?
+  description String?
+
+  @@index([routeId])
+}
+
+/// Lazy-loaded geometry. GeoJSON LineString decoded from GPX.
+model RouteGeometry {
+  route   Route  @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  routeId String @id
+  /// GeoJSON LineString: { type, coordinates: [lng, lat, elevation?][] }
+  geoJson Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
