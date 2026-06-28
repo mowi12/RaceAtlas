@@ -352,3 +352,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,macos,windows,visualstudiocode,webstorm+iml,node,nextjs
+
+### Prisma
+/src/generated/prisma
