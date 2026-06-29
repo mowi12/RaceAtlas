@@ -12,7 +12,8 @@
     "format": "biome format --write",
     "check:contrast": "node scripts/check-contrast.mjs",
     "db:generate": "prisma generate",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && next build"
   },
   "dependencies": {
     "@prisma/client": "^7.8.0",
