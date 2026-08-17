@@ -16,7 +16,7 @@
     "vercel-build": "prisma generate && next build"
   },
   "dependencies": {
-    "@prisma/client": "^7.8.0",
+    "@prisma/client": "^7.9.1",
     "clsx": "^2.1.1",
     "d3-geo": "^3.1.1",
     "dotenv": "^17.4.2",
@@ -39,7 +39,7 @@
     "@types/topojson-client": "^3.1.5",
     "@types/topojson-specification": "^1.0.5",
     "babel-plugin-react-compiler": "1.0.0",
-    "prisma": "^7.8.0",
+    "prisma": "^7.9.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   },
