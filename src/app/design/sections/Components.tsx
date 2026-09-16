@@ -4,6 +4,15 @@ import { useState } from "react";
 import { Section, VariantRow } from "@/app/design/showcase/ShowcaseLayout";
 import { Logo } from "@/components/brand/Logo";
 import { Wordmark } from "@/components/brand/Wordmark";
+import { CalendarCell } from "@/components/data/CalendarCell";
+import {
+  ElevationProfile,
+  ElevationSpark,
+} from "@/components/data/ElevationProfile";
+import { EventCard } from "@/components/data/EventCard";
+import { EventRow } from "@/components/data/EventRow";
+import { MapPin } from "@/components/data/MapPin";
+import { TimelineRow } from "@/components/data/TimelineRow";
 import { Compass } from "@/components/decorative/Compass";
 import { Contour } from "@/components/decorative/Contour";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -13,11 +22,27 @@ import { Badge } from "@/components/ui/Badge";
 import { BreadcrumbBar } from "@/components/ui/BreadcrumbBar";
 import { Button } from "@/components/ui/Button";
 import { CapacityBar } from "@/components/ui/CapacityBar";
+import { CountdownDisplay } from "@/components/ui/CountdownDisplay";
 import { FilterChip } from "@/components/ui/FilterChip";
 import { SnapSlider } from "@/components/ui/SnapSlider";
+import { StatBlock } from "@/components/ui/StatBlock";
 import { UrlDisplay } from "@/components/ui/UrlDisplay";
+import { MOCK_EVENTS } from "@/data/mock-events";
 import { toBadgeSurface, toCapacityState } from "@/lib/badge";
 import { Surface } from "@/types";
+
+// MOCK_EVENTS is a fixed-length literal; indices below always exist.
+function eventAt(index: number) {
+  const event = MOCK_EVENTS[index];
+  if (!event) throw new Error(`no mock event at index ${index}`);
+  return event;
+}
+
+const berlin = eventAt(0);
+const hamburg = eventAt(1);
+const trail = eventAt(2);
+const ultra = eventAt(6);
+const noCapacity = eventAt(8); // Rhein Run 21 — has no race.capacity, demos the dropped CapacityBar
 
 const CHIP_LABELS = ["NEAREST", "SOONEST", "ROAD", "TRAIL", "ULTRA"];
 
@@ -314,6 +339,25 @@ export function Components() {
         </div>
       </Section>
 
+      <Section id="stats" title="Stat Blocks">
+        <div className="flex flex-col gap-8">
+          <VariantRow label="SIZE · sm">
+            <StatBlock value="12" label="EVENTS" size="sm" />
+            <StatBlock value="487" label="OPEN NOW" size="sm" />
+            <StatBlock value="034D" label="NEXT" size="sm" />
+          </VariantRow>
+          <VariantRow label="SIZE · md">
+            <StatBlock value="1,284" label="EVENTS" size="md" />
+            <StatBlock value="487" label="OPEN NOW" size="md" />
+            <StatBlock value="034D" label="NEXT" size="md" />
+          </VariantRow>
+          <VariantRow label="SIZE · lg">
+            <StatBlock value="1,284" label="EVENTS INDEXED" size="lg" />
+            <StatBlock value="04 TRAIL" label="IN RADIUS" size="lg" />
+          </VariantRow>
+        </div>
+      </Section>
+
       <Section id="capacity" title="Capacity Bar">
         <div className="flex flex-col gap-6 max-w-md">
           <VariantRow label="0–50% · black (30%)">
@@ -347,6 +391,111 @@ export function Components() {
             </div>
           </VariantRow>
         </div>
+      </Section>
+
+      <Section id="countdown" title="Countdown Display">
+        <div className="flex flex-wrap gap-12 items-end">
+          <div className="flex flex-col gap-1">
+            <div className="font-mono text-[9px] tracking-[2px] text-muted-foreground">
+              SIZE · sm
+            </div>
+            <CountdownDisplay days={14} size="sm" />
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="font-mono text-[9px] tracking-[2px] text-muted-foreground">
+              SIZE · md
+            </div>
+            <CountdownDisplay days={136} size="md" />
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="font-mono text-[9px] tracking-[2px] text-muted-foreground">
+              SIZE · lg
+            </div>
+            <CountdownDisplay days={200} size="lg" />
+          </div>
+        </div>
+      </Section>
+
+      <Section id="event-row" title="Event Row">
+        <div className="max-w-2xl border-b border-border">
+          <EventRow event={berlin} />
+          <EventRow event={trail} />
+          <EventRow event={ultra} />
+          <EventRow event={hamburg} />
+        </div>
+      </Section>
+
+      <Section id="event-card" title="Event Card">
+        <div className="flex flex-col gap-8">
+          <VariantRow label="FEATURED (waitlist)">
+            <div className="w-full max-w-xl">
+              <EventCard event={berlin} variant="featured" />
+            </div>
+          </VariantRow>
+          <VariantRow label="COMPACT · trail">
+            <div className="w-80">
+              <EventCard event={trail} variant="compact" />
+            </div>
+          </VariantRow>
+          <VariantRow label="COMPACT · no capacity data">
+            <div className="w-80">
+              <EventCard event={noCapacity} variant="compact" />
+            </div>
+          </VariantRow>
+        </div>
+      </Section>
+
+      <Section id="calendar" title="Calendar Cell">
+        <div className="grid grid-cols-7 gap-px bg-border border border-border w-full max-w-2xl">
+          <CalendarCell day={1} inMonth={true} />
+          <CalendarCell day={2} inMonth={true} event={berlin} />
+          <CalendarCell day={3} inMonth={true} />
+          <CalendarCell day={4} inMonth={true} event={trail} />
+          <CalendarCell day={5} inMonth={true} />
+          <CalendarCell day={6} inMonth={false} />
+          <CalendarCell day={7} inMonth={false} />
+        </div>
+      </Section>
+
+      <Section id="timeline" title="Timeline Row">
+        <div className="relative w-full h-30 border border-border bg-card overflow-hidden">
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: `repeating-linear-gradient(0deg, var(--border) 0 1px, transparent 1px 26px), repeating-linear-gradient(90deg, color-mix(in srgb, var(--border) 55%, transparent) 0 1px, transparent 1px 8.33%)`,
+              backgroundPosition: "0 4px, 0 0",
+            }}
+          />
+          <TimelineRow event={berlin} offsetPct={65} top={10} />
+          <TimelineRow event={trail} offsetPct={20} top={36} />
+          <TimelineRow event={ultra} offsetPct={40} top={62} />
+        </div>
+      </Section>
+
+      <Section id="elevation" title="Elevation Profile">
+        <div className="flex flex-col gap-12">
+          <VariantRow label="FULL PROFILE">
+            <div className="w-full">
+              <ElevationProfile />
+            </div>
+          </VariantRow>
+          <VariantRow label="SPARKLINE (for event rows)">
+            <ElevationSpark w={120} h={28} seed={1} />
+            <ElevationSpark w={120} h={28} seed={5} />
+            <ElevationSpark w={120} h={28} seed={9} />
+            <ElevationSpark w={120} h={28} seed={13} />
+          </VariantRow>
+        </div>
+      </Section>
+
+      <Section id="map-pin" title="Map Pins">
+        <VariantRow label="YOU · ROAD EVENT · TRAIL EVENT">
+          <div className="relative flex items-start gap-20 py-4 pl-4">
+            <MapPin type="you" label="You" />
+            <MapPin type="road" event={berlin} />
+            <MapPin type="trail" event={trail} />
+          </div>
+        </VariantRow>
       </Section>
 
       <Section id="breadcrumb" title="Breadcrumb Bar">
